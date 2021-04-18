@@ -17,7 +17,7 @@ public class JwtTokenUtil {
 
     public String generateJwtToken(Authentication authentication){
         CustomUserBean userPrincipal = (CustomUserBean)authentication.getPrincipal();
-        return Jwts.builder().setSubject(userPrincipal.getUsername()).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + jwtTokenExpiration)).signWith(SignatureAlgorithm.ES512, jwtTokenSecret).compact();
+        return Jwts.builder().setSubject(userPrincipal.getUsername()).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + jwtTokenExpiration)).signWith(SignatureAlgorithm.HS512, jwtTokenSecret).compact();
     }
 
     public boolean validateJwtToken(String token){

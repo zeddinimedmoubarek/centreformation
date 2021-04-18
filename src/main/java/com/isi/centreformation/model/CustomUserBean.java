@@ -28,7 +28,7 @@ public class CustomUserBean implements UserDetails {
             this.authorities = authorities;
         }
         public static CustomUserBean createInstance(User user) {
-            List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toList());
+            List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRoleName().name())).collect(Collectors.toList());
             return new CustomUserBean(user.getId(), user.getUserName(), user.getEmail(), user.getPassword(), authorities);
         }
         @Override
