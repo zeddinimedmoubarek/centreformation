@@ -1,24 +1,25 @@
 package com.isi.centreformation.service;
-
-import com.isi.centreformation.model.CustomUserBean;
-import com.isi.centreformation.model.User;
-import com.isi.centreformation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-
+import com.isi.centreformation.model.*;
+import com.isi.centreformation.repository.*;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
-    UserRepository userRepository;
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String username)throws UsernameNotFoundException {
-       User user = userRepository.findByUserName(username).orElseThrow(() -> new UsernameNotFoundException("User with " + " user name" + username + " not found"));
-       return CustomUserBean.createInstance(user);
-    }
+	@Autowired
+	UserRepository userRepository;
+
+	@Override
+	@Transactional
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = userRepository.findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+
+		return UserDetailsImpl.build(user);
+	}
+
 }

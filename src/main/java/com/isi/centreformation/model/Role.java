@@ -1,51 +1,39 @@
 package com.isi.centreformation.model;
 
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 
-@DynamicUpdate
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "name")
-    private Roles roleName;
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
+	private ERole name;
 
-    public Role(Integer id, Roles roleName) {
-        this.id = id;
-        this.roleName = roleName;
-    }
+	public Role() {
 
-    public Role() {
-        super();
-    }
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Role(ERole name) {
+		this.name = name;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Roles getRoleName() {
-        return roleName;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setRoleName(Roles roleName) {
-        this.roleName = roleName;
-    }
+	public ERole getName() {
+		return name;
+	}
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", roleName='" + roleName + '\'' +
-                '}';
-    }
+	public void setName(ERole name) {
+		this.name = name;
+	}
 }

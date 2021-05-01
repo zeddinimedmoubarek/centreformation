@@ -1,94 +1,90 @@
 package com.isi.centreformation.model;
 
-import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-@DynamicUpdate
 @Entity
-@Table(name = "users")
+@Table(	name = "users", 
+		uniqueConstraints = { 
+			@UniqueConstraint(columnNames = "username"),
+			@UniqueConstraint(columnNames = "email") 
+		})
 public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "user_name")
-    private String userName;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "password")
-    private String password;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role",
-                joinColumns = @JoinColumn(name = "USER_ID",
-                referencedColumnName="ID"),
-                inverseJoinColumns = @JoinColumn(name = "ROLE_ID",
-                referencedColumnName = "ID"))
-    private Set<Role> roles = new HashSet<>();
+	@NotBlank
+	@Size(max = 20)
+	private String username;
 
-    public User(Integer id, String userName, String email, String password, Set<Role> roles) {
-        this.id = id;
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
+	@NotBlank
+	@Size(max = 50)
+	@Email
+	private String email;
 
-    public User() {
-        super();
-    }
+	@NotBlank
+	@Size(max = 120)
+	private String password;
 
-    public Integer getId() {
-        return id;
-    }
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(	name = "user_roles", 
+				joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public User() {
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public User(String username, String email, String password) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                '}';
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 }
+
