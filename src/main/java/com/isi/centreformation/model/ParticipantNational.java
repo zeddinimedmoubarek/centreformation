@@ -1,6 +1,8 @@
 package com.isi.centreformation.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -18,9 +20,13 @@ public class ParticipantNational implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	public ParticipantNational(Long id) {
-		super();
+	@ManyToOne
+	@JsonIgnoreProperties(value = "participantInternationals", allowSetters = true)
+	private Organisme organisme;
+
+	public ParticipantNational(Long id, Organisme organisme) {
 		this.id = id;
+		this.organisme = organisme;
 	}
 
 	public ParticipantNational() {
@@ -35,10 +41,19 @@ public class ParticipantNational implements Serializable {
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "ParticipantNational [id=" + id + "]";
+	public Organisme getOrganisme() {
+		return organisme;
 	}
 
-    
+	public void setOrganisme(Organisme organisme) {
+		this.organisme = organisme;
+	}
+
+	@Override
+	public String toString() {
+		return "ParticipantNational{" +
+				"id=" + id +
+				", organisme=" + organisme +
+				'}';
+	}
 }

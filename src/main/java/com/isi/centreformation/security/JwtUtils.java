@@ -15,10 +15,10 @@ import com.isi.centreformation.service.*;
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-	@Value("${isi.idl.jwtSecret}")
+	@Value("${jwttoken.secret}")
 	private String jwtSecret;
 
-	@Value("${isi.idl.jwtExpirationMs}")
+	@Value("${jwttoken.expiration}")
 	private int jwtExpirationMs;
 
 	public String generateJwtToken(Authentication authentication) {
