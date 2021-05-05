@@ -29,12 +29,15 @@ public class Organisme implements Serializable {
     @OneToMany(mappedBy = "organisme")
     private Set<Formateur> formateurs = new HashSet<>();
 
-	public Organisme(Long id, String libelle, Set<SessionFormation> sessionFormations, Set<Formateur> formateurs) {
-		super();
+	@OneToMany(mappedBy = "organisme")
+	private Set<Participant> participants = new HashSet<>();
+
+	public Organisme(Long id, String libelle, Set<SessionFormation> sessionFormations, Set<Formateur> formateurs, Set<Participant> participants) {
 		this.id = id;
 		this.libelle = libelle;
 		this.sessionFormations = sessionFormations;
 		this.formateurs = formateurs;
+		this.participants = participants;
 	}
 
 	public Organisme() {
@@ -73,11 +76,22 @@ public class Organisme implements Serializable {
 		this.formateurs = formateurs;
 	}
 
-	@Override
-	public String toString() {
-		return "Organisme [id=" + id + ", libelle=" + libelle + ", sessionFormations=" + sessionFormations
-				+ ", formateurs=" + formateurs + "]";
+	public Set<Participant> getParticipantNationals() {
+		return participants;
 	}
 
-    
+	public void setParticipantNationals(Set<Participant> participants) {
+		this.participants = participants;
+	}
+
+	@Override
+	public String toString() {
+		return "Organisme{" +
+				"id=" + id +
+				", libelle='" + libelle + '\'' +
+				", sessionFormations=" + sessionFormations +
+				", formateurs=" + formateurs +
+				", participantsNationals=" + participants +
+				'}';
+	}
 }

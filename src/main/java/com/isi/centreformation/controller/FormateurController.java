@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.isi.centreformation.repository.FormateurRepository;
+import com.isi.centreformation.service.FormateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,31 +21,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isi.centreformation.exception.ResourceNotFoundException;
 import com.isi.centreformation.model.Formateur;
-import com.isi.centreformation.repository.FormateurRepository;
 
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class FormateurController {
+
 	@Autowired
     private FormateurRepository formateurRepository;
+
+    @Autowired
+    private FormateurService formateurService;
     
 	//@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
     @GetMapping("/formateurs")
     public List<Formateur> getAllFormateurs() {
-        return formateurRepository.findAll();
+        return formateurService.getAllFormateurs();
     }
     
     @PostMapping("/formateurs")
-    public Formateur createFormateur(@Valid @RequestBody Formateur formateur) {
-        return formateurRepository.save(formateur);
+    public Long createFormateur(@Valid @RequestBody Formateur formateur) {
+        return formateurService.createFormateur(formateur);
     }
 
     @GetMapping("/formateurs/{id}")
     public ResponseEntity<Formateur> getFormateurById(
             @PathVariable(value = "id") Long formateurId)
             throws ResourceNotFoundException {
-    	Formateur formateur = formateurRepository.findById(formateurId)
+    	Formateur formateur = formateurService.getFormateurById(formateurId)
                 .orElseThrow(() -> new ResourceNotFoundException("Formateur introuvable avec le code = " + formateurId));
         return ResponseEntity.ok().body(formateur);
     }
@@ -51,7 +56,7 @@ public class FormateurController {
     @PutMapping("/formateurs/{id}")
     public ResponseEntity<Formateur> updateFormateur(
             @PathVariable(value = "id") Long formateurId,@Valid @RequestBody Formateur formateurDetails) throws ResourceNotFoundException {
-    	Formateur formateur = formateurRepository.findById(formateurId).orElseThrow(() -> new ResourceNotFoundException("Formateur introuvable avec le code = " + formateurId));
+    	Formateur formateur = formateurService.getFormateurById(formateurId).orElseThrow(() -> new ResourceNotFoundException("Formateur introuvable avec le code = " + formateurId));
         formateur.setEmail(formateurDetails.getEmail());
         formateur.setNom(formateurDetails.getNom());
         formateur.setOrganisme(formateurDetails.getOrganisme());
@@ -67,9 +72,9 @@ public class FormateurController {
     public Map<String, Boolean> deleteFormateur(
             @PathVariable(value = "id") Long formateurId)
             throws ResourceNotFoundException {
-    	Formateur formateur = formateurRepository.findById(formateurId).orElseThrow(() -> new ResourceNotFoundException("Formateur introuvable avec le code = " + formateurId));
+    	Formateur formateur = formateurService.getFormateurById(formateurId).orElseThrow(() -> new ResourceNotFoundException("Formateur introuvable avec le code = " + formateurId));
 
-        formateurRepository.delete(formateur);
+        formateurService.deleteFormateur(formateur.getId());
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;

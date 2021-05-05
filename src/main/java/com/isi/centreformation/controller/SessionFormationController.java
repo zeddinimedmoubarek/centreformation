@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.isi.centreformation.service.SessionFormationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,25 +25,28 @@ import com.isi.centreformation.repository.SessionFormationRepository;
 @RestController
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class SessionFormationController {
+
+    @Autowired
+    private SessionFormationService sessionFormationService;
 	@Autowired
     private SessionFormationRepository sessionformationRepository;
     
 	//@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
     @GetMapping("/Sessionformations")
     public List<SessionFormation> getAllSessionFormations() {
-        return sessionformationRepository.findAll();
+        return sessionFormationService.getAllSessionFormations();
     }
     
     @PostMapping("/Sessionformations")
-    public SessionFormation createFormation(@Valid @RequestBody SessionFormation sessionformation) {
-        return sessionformationRepository.save(sessionformation);
+    public Long createFormation(@Valid @RequestBody SessionFormation sessionformation) {
+        return sessionFormationService.createSessionFormation(sessionformation);
     }
 
     @GetMapping("/Sessionformations/{id}")
     public ResponseEntity<SessionFormation> getSessionFormationById(
             @PathVariable(value = "id") Long sessionformationId)
             throws ResourceNotFoundException {
-    	SessionFormation sessionformation = sessionformationRepository.findById(sessionformationId)
+    	SessionFormation sessionformation = sessionFormationService.getSessionFormationById(sessionformationId)
                 .orElseThrow(() -> new ResourceNotFoundException("SessionFormation introuvable avec le code = " + sessionformationId));
         return ResponseEntity.ok().body(sessionformation);
     }
@@ -50,7 +54,7 @@ public class SessionFormationController {
     @PutMapping("/Sessionformations/{id}")
     public ResponseEntity<SessionFormation> updateSessionFormation(
             @PathVariable(value = "id") Long sessionformationId,@Valid @RequestBody SessionFormation sessionformationDetails) throws ResourceNotFoundException {
-    	SessionFormation sessionformation = sessionformationRepository.findById(sessionformationId).orElseThrow(() -> new ResourceNotFoundException("SessionFormation introuvable avec le code = " + sessionformationId));
+    	SessionFormation sessionformation = sessionFormationService.getSessionFormationById(sessionformationId).orElseThrow(() -> new ResourceNotFoundException("SessionFormation introuvable avec le code = " + sessionformationId));
       
       
         final SessionFormation updatedSessionFormation = sessionformationRepository.save(sessionformation);
@@ -61,9 +65,9 @@ public class SessionFormationController {
     public Map<String, Boolean> deleteSessionFormation(
             @PathVariable(value = "id") Long sessionformationId)
             throws ResourceNotFoundException {
-    	SessionFormation sessionformation = sessionformationRepository.findById(sessionformationId).orElseThrow(() -> new ResourceNotFoundException("SessionFormation introuvable avec le code = " + sessionformationId));
+    	SessionFormation sessionformation = sessionFormationService.getSessionFormationById(sessionformationId).orElseThrow(() -> new ResourceNotFoundException("SessionFormation introuvable avec le code = " + sessionformationId));
 
-        sessionformationRepository.delete(sessionformation);
+        sessionFormationService.deleteSessionFormation(sessionformation.getId());
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;

@@ -3,10 +3,11 @@ package com.isi.centreformation.service;
 import com.isi.centreformation.model.Organisme;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrganismeService {
     List<Organisme> getAllOrganismes();
-    Organisme getOrganismeById(Long id);
-    Organisme createOrganisme(Organisme organisme);
+    Optional<Organisme> getOrganismeById(Long id);
+    Long createOrganisme(Organisme organisme);
     void deleteOrganisme(Long id);
 }

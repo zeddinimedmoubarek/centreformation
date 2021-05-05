@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.isi.centreformation.service.FormationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,23 +27,26 @@ import com.isi.centreformation.repository.FormationRepository;
 public class FormationController {
 	@Autowired
     private FormationRepository formationRepository;
+
+	@Autowired
+    private FormationService formationService;
     
 	//@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
     @GetMapping("/formations")
     public List<Formation> getAllFormations() {
-        return formationRepository.findAll();
+        return formationService.getAllFormations();
     }
     
     @PostMapping("/formations")
-    public Formation createFormation(@Valid @RequestBody Formation formation) {
-        return formationRepository.save(formation);
+    public Long createFormation(@Valid @RequestBody Formation formation) {
+        return formationService.createFormation(formation);
     }
 
     @GetMapping("/formations/{id}")
     public ResponseEntity<Formation> getFormationById(
             @PathVariable(value = "id") Long formationId)
             throws ResourceNotFoundException {
-    	Formation formation = formationRepository.findById(formationId)
+    	Formation formation = formationService.getFormationById(formationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Formation introuvable avec le code = " + formationId));
         return ResponseEntity.ok().body(formation);
     }
@@ -50,7 +54,7 @@ public class FormationController {
     @PutMapping("/formations/{id}")
     public ResponseEntity<Formation> updateFormation(
             @PathVariable(value = "id") Long formationId,@Valid @RequestBody Formation formationDetails) throws ResourceNotFoundException {
-    	Formation formation = formationRepository.findById(formationId).orElseThrow(() -> new ResourceNotFoundException("Formation introuvable avec le code = " + formationId));
+    	Formation formation = formationService.getFormationById(formationId).orElseThrow(() -> new ResourceNotFoundException("Formation introuvable avec le code = " + formationId));
       formation.setBudget(formationDetails.getBudget());
       formation.setDomaine(formationDetails.getDomaine());
       formation.setDuree(formationDetails.getDuree());
@@ -66,9 +70,9 @@ public class FormationController {
     public Map<String, Boolean> deleteFormation(
             @PathVariable(value = "id") Long formationId)
             throws ResourceNotFoundException {
-    	Formation formation = formationRepository.findById(formationId).orElseThrow(() -> new ResourceNotFoundException("Formation introuvable avec le code = " + formationId));
+    	Formation formation = formationService.getFormationById(formationId).orElseThrow(() -> new ResourceNotFoundException("Formation introuvable avec le code = " + formationId));
 
-        formationRepository.delete(formation);
+        formationService.deleteFormation(formation.getId());
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
