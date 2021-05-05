@@ -5,40 +5,27 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
-import java.io.Serializable;
+import java.util.Set;
 
 /**
  * A ParticipantNational.
  */
 @Entity
-@Table(name = "participant_national")
-public class ParticipantNational implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@DiscriminatorValue(value = "participant_national")
+//@Table(name = "participant_national")
+public class ParticipantNational extends Participant {
 
 	@ManyToOne
-	@JsonIgnoreProperties(value = "participantInternationals", allowSetters = true)
+	@JsonIgnoreProperties(value = "participantNationals", allowSetters = true)
 	private Organisme organisme;
 
-	public ParticipantNational(Long id, Organisme organisme) {
-		this.id = id;
+	public ParticipantNational(Long id, String nom, String prenom, String email, String tel, Profil profil, Set<SessionFormation> sessionFormations, Organisme organisme) {
+		super(id, nom, prenom, email, tel, profil, sessionFormations);
 		this.organisme = organisme;
 	}
 
 	public ParticipantNational() {
 		super();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Organisme getOrganisme() {
@@ -52,7 +39,6 @@ public class ParticipantNational implements Serializable {
 	@Override
 	public String toString() {
 		return "ParticipantNational{" +
-				"id=" + id +
 				", organisme=" + organisme +
 				'}';
 	}
