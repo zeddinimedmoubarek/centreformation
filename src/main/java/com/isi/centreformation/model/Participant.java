@@ -34,23 +34,36 @@ public class Participant implements Serializable {
     @Column(name = "tel")
     private String tel;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = "participants", allowSetters = true)
-    private Profil profil;
+    @Enumerated(EnumType.STRING)
+	@Column(name = "type_participant")
+    private EParticipant typeParticipant;
+
+	@ManyToOne
+	@JsonIgnoreProperties(value = "participants", allowSetters = true)
+	private Profil profil;
+
+	@ManyToOne
+	@JsonIgnoreProperties(value = "participantInternationals", allowSetters = true)
+	private Pays pays;
+
+	@ManyToOne
+	@JsonIgnoreProperties(value = "participantNationals", allowSetters = true)
+	private Organisme organisme;
 
     @ManyToMany(mappedBy = "participants")
     @JsonIgnore
     private Set<SessionFormation> sessionFormations = new HashSet<>();
 
-	public Participant(Long id, String nom, String prenom, String email, String tel, Profil profil,
-			Set<SessionFormation> sessionFormations) {
-		super();
+	public Participant(Long id, String nom, String prenom, String email, String tel, EParticipant typeParticipant, Profil profil, Pays pays, Organisme organisme, Set<SessionFormation> sessionFormations) {
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.tel = tel;
+		this.typeParticipant = typeParticipant;
 		this.profil = profil;
+		this.pays = pays;
+		this.organisme = organisme;
 		this.sessionFormations = sessionFormations;
 	}
 
@@ -98,6 +111,30 @@ public class Participant implements Serializable {
 		this.tel = tel;
 	}
 
+	public EParticipant getTypeParticipant() {
+		return typeParticipant;
+	}
+
+	public void setTypeParticipant(EParticipant typeParticipant) {
+		this.typeParticipant = typeParticipant;
+	}
+
+	public Pays getPays() {
+		return pays;
+	}
+
+	public void setPays(Pays pays) {
+		this.pays = pays;
+	}
+
+	public Organisme getOrganisme() {
+		return organisme;
+	}
+
+	public void setOrganisme(Organisme organisme) {
+		this.organisme = organisme;
+	}
+
 	public Profil getProfil() {
 		return profil;
 	}
@@ -116,8 +153,17 @@ public class Participant implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Participant [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", tel=" + tel
-				+ ", profil=" + profil + ", sessionFormations=" + sessionFormations + "]";
+		return "Participant{" +
+				"id=" + id +
+				", nom='" + nom + '\'' +
+				", prenom='" + prenom + '\'' +
+				", email='" + email + '\'' +
+				", tel='" + tel + '\'' +
+				", typeParticipant=" + typeParticipant +
+				", pays=" + pays +
+				", organisme=" + organisme +
+				", profil=" + profil +
+				", sessionFormations=" + sessionFormations +
+				'}';
 	}
-
 }

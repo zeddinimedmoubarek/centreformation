@@ -23,17 +23,17 @@ public class ProfilController {
     private ProfilRepository profilRepository;
 
     //@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/profils")
+    @GetMapping("/profils/all")
     public List<Profil> getAllProfils() {
         return profilService.getAllProfils();
     }
 
-    @PostMapping("/profils")
+    @PostMapping("/profils/new")
     public Long createProfil(@Valid @RequestBody Profil profil) {
         return profilService.createProfil(profil);
     }
 
-    @GetMapping("/profils/{id}")
+    @GetMapping("/profils/get/{id}")
     public ResponseEntity<Profil> getProfilById(
             @PathVariable(value = "id") Long profilId)
             throws ResourceNotFoundException {
@@ -42,7 +42,7 @@ public class ProfilController {
         return ResponseEntity.ok().body(profil);
     }
 
-    @PutMapping("/profils/{id}")
+    @PutMapping("/profils/update/{id}")
     public ResponseEntity<Profil> updateProfil(
             @PathVariable(value = "id") Long profilId,@Valid @RequestBody Profil profilDetails) throws ResourceNotFoundException {
         Profil profil = profilService.getProfilById(profilId).orElseThrow(() -> new ResourceNotFoundException("Profil introuvable avec le code = " + profilId));
@@ -53,7 +53,7 @@ public class ProfilController {
         return ResponseEntity.ok(updatedProfil);
     }
 
-    @DeleteMapping("/profils/{id}")
+    @DeleteMapping("/profils/delete/{id}")
     public Map<String, Boolean> deleteProfil(
             @PathVariable(value = "id") Long profilId)
             throws ResourceNotFoundException {

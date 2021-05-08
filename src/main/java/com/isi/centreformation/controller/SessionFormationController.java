@@ -32,17 +32,17 @@ public class SessionFormationController {
     private SessionFormationRepository sessionformationRepository;
     
 	//@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/Sessionformations")
+    @GetMapping("/Sessionformations/all")
     public List<SessionFormation> getAllSessionFormations() {
         return sessionFormationService.getAllSessionFormations();
     }
     
-    @PostMapping("/Sessionformations")
+    @PostMapping("/Sessionformations/new")
     public Long createFormation(@Valid @RequestBody SessionFormation sessionformation) {
         return sessionFormationService.createSessionFormation(sessionformation);
     }
 
-    @GetMapping("/Sessionformations/{id}")
+    @GetMapping("/Sessionformations/get/{id}")
     public ResponseEntity<SessionFormation> getSessionFormationById(
             @PathVariable(value = "id") Long sessionformationId)
             throws ResourceNotFoundException {
@@ -51,7 +51,7 @@ public class SessionFormationController {
         return ResponseEntity.ok().body(sessionformation);
     }
 
-    @PutMapping("/Sessionformations/{id}")
+    @PutMapping("/Sessionformations/update/{id}")
     public ResponseEntity<SessionFormation> updateSessionFormation(
             @PathVariable(value = "id") Long sessionformationId,@Valid @RequestBody SessionFormation sessionformationDetails) throws ResourceNotFoundException {
     	SessionFormation sessionformation = sessionFormationService.getSessionFormationById(sessionformationId).orElseThrow(() -> new ResourceNotFoundException("SessionFormation introuvable avec le code = " + sessionformationId));
@@ -61,7 +61,7 @@ public class SessionFormationController {
         return ResponseEntity.ok(updatedSessionFormation);
     }
 
-    @DeleteMapping("/Sessionformations/{id}")
+    @DeleteMapping("/Sessionformations/delete/{id}")
     public Map<String, Boolean> deleteSessionFormation(
             @PathVariable(value = "id") Long sessionformationId)
             throws ResourceNotFoundException {

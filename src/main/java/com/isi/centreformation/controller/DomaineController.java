@@ -24,17 +24,17 @@ public class DomaineController {
     private DomaineService domaineService;
 
     //@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/domaines")
+    @GetMapping("/domaines/all")
     public List<Domaine> getAllDomaines() {
         return domaineService.getAllDomaines();
     }
 
-    @PostMapping("/domaines")
+    @PostMapping("/domaines/new")
     public Long createDomaine(@Valid @RequestBody Domaine domaine) {
         return domaineService.createDomaine(domaine);
     }
 
-    @GetMapping("/domaines/{id}")
+    @GetMapping("/domaines/get/{id}")
     public ResponseEntity<Domaine> getDomaineById(
             @PathVariable(value = "id") Long domaineId)
             throws ResourceNotFoundException {
@@ -43,7 +43,7 @@ public class DomaineController {
         return ResponseEntity.ok().body(domaine);
     }
 
-    @PutMapping("/domaines/{id}")
+    @PutMapping("/domaines/update/{id}")
     public ResponseEntity<Domaine> updateDomaine(
             @PathVariable(value = "id") Long domaineId, @Valid @RequestBody Domaine domaineDetails) throws ResourceNotFoundException {
         Domaine domaine = domaineService.getDomaineById(domaineId).orElseThrow(() -> new ResourceNotFoundException("Domaine introuvable avec le code = " + domaineId));
@@ -54,7 +54,7 @@ public class DomaineController {
         return ResponseEntity.ok(updatedDomaine);
     }
 
-    @DeleteMapping("/domaines/{id}")
+    @DeleteMapping("/domaines/delete/{id}")
     public Map<String, Boolean> deleteDomaine(
             @PathVariable(value = "id") Long domaineId)
             throws ResourceNotFoundException {
