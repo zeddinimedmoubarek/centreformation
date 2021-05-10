@@ -28,17 +28,17 @@ public class UserController {
     private UserRepository userRepository;
     
 	//@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/users")
+    @GetMapping("/users/all")
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
     
-    @PostMapping("/users")
+    @PostMapping("/users/new")
     public User createUser(@Valid @RequestBody User user) {
         return userRepository.save(user);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/users/get/{id}")
     public ResponseEntity<User> getUserById(
             @PathVariable(value = "id") Long userId)
             throws ResourceNotFoundException {
@@ -47,7 +47,7 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/users/update/{id}")
     public ResponseEntity<User> updateUser(
             @PathVariable(value = "id") Long userId,@Valid @RequestBody User userDetails) throws ResourceNotFoundException {
     	User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User introuvable avec le code = " + userId));
@@ -60,7 +60,7 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/users/delete/{id}")
     public Map<String, Boolean> deleteUser(
             @PathVariable(value = "id") Long userId)
             throws ResourceNotFoundException {

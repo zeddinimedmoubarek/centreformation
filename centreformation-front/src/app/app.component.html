@@ -1,0 +1,17 @@
+<div id="app">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span><a href="/">Centre Formation</a></span>
+      <span class="spacer"></span>
+      <a mat-button routerLink="/register" *ngIf="!isLoggedIn">Register</a>
+      <a mat-button routerLink="/login" *ngIf="!isLoggedIn">Login</a>
+      <a mat-button routerLink="/admin" *ngIf="showAdminBoard">Admin</a>
+      <a mat-button routerLink="/user" *ngIf="isLoggedIn">User</a>
+      <a mat-button routerLink="/profile" *ngIf="isLoggedIn">{{ username }}</a>
+      <a mat-button routerLink="/login" *ngIf="isLoggedIn" (click)="logout()">Logout</a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

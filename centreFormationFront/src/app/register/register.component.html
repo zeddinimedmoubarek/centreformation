@@ -1,0 +1,63 @@
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>Register</mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && onSubmit()" novalidate>
+    <mat-card-content>
+      <section>
+        <div class="label">Username</div>
+      <mat-form-field appearance="legacy">
+        <input
+        id="username"
+        matInput
+        formControlName="username"
+        placeholder="Username"
+        type="text"
+        name="username"
+        [(ngModel)]="user.username"/>
+      </mat-form-field>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
+      <div class="label">Email</div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Enter your email</mat-label>
+        <input
+          id="email"
+          matInput
+          formControlName="email"
+          placeholder="pat@example.com"
+          required
+          name="email"
+          [(ngModel)]="user.email"/>
+      </mat-form-field>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
+      <div class="label">Password</div>
+      <mat-form-field appearance="legacy">
+        <mat-label>Enter your password</mat-label>
+        <input
+          id="password"
+          matInput [type]="hide ? 'password' : 'text'"
+          formControlName="password"
+          placeholder="password"
+          [(ngModel)]="user.password"/>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </section>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+    <div class="button-row">
+    <button mat-stroked-button color="primary" type="submit" [disabled]="!registerForm.valid">Register</button>
+    <button mat-button routerLink="/login">Login</button>
+    <button mat-button color="warn" type="reset">Cancel</button>
+  </div>
+</mat-card-actions>
+    </mat-card-content>
+  </form>
+</mat-card>
+</div>
