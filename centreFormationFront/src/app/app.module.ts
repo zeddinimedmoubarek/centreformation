@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule   } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -29,7 +33,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule, FormControl} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -50,6 +54,17 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProfileComponent } from './profile/profile.component';
+import { ListPaysComponent } from './list-pays/list-pays.component';
+import { PaysComponent } from './pays/pays.component';
+import { AuthInterceptor } from './_helpers/auth.service';
+import { CdkTableModule } from '@angular/cdk/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ListOrganismeComponent } from './list-organisme/list-organisme.component';
+import { OrganismeComponent } from './organisme/organisme.component';
+import { ProfilComponent } from './profil/profil.component';
+import { ListProfilComponent } from './list-profil/list-profil.component';
+import { DomaineComponent } from './domaine/domaine.component';
+import { ListDomaineComponent } from './list-domaine/list-domaine.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +75,15 @@ import { ProfileComponent } from './profile/profile.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    ListPaysComponent,
+    PaysComponent,
+    ListOrganismeComponent,
+    OrganismeComponent,
+    ProfilComponent,
+    ListProfilComponent,
+    DomaineComponent,
+    ListDomaineComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -74,44 +97,58 @@ import { ProfileComponent } from './profile/profile.component';
     MatIconModule,
     MatListModule,
     CdkTreeModule,
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatProgressSpinnerModule,
-  MatPaginatorModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatFormFieldModule,
-  ReactiveFormsModule,
-  FormsModule,
-  MatButtonToggleModule,
-  MatTreeModule,
-  OverlayModule,
-  PortalModule,
-  MatBadgeModule,
-  MatGridListModule,
-  MatRadioModule,
-  MatDatepickerModule,
-  MatTooltipModule,
-  MatCardModule
-
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatButtonToggleModule,
+    MatTreeModule,
+    OverlayModule,
+    PortalModule,
+    MatBadgeModule,
+    MatGridListModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatTableModule,
+    CdkTableModule,
+    MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
-  schemas: []
+  schemas: [],
+  entryComponents: [
+    PaysComponent,
+    OrganismeComponent,
+    ProfilComponent,
+    DomaineComponent,
+  ],
 })
-export class AppModule { }
+export class AppModule {}

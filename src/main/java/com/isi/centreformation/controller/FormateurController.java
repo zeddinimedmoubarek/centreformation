@@ -34,17 +34,17 @@ public class FormateurController {
     private FormateurService formateurService;
     
 	//@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/formateurs/all")
+    @GetMapping("/formateurs")
     public List<Formateur> getAllFormateurs() {
         return formateurService.getAllFormateurs();
     }
     
-    @PostMapping("/formateurs/new")
+    @PostMapping("/formateurs")
     public Long createFormateur(@Valid @RequestBody Formateur formateur) {
         return formateurService.createFormateur(formateur);
     }
 
-    @GetMapping("/formateurs/get/{id}")
+    @GetMapping("/formateurs/{id}")
     public ResponseEntity<Formateur> getFormateurById(
             @PathVariable(value = "id") Long formateurId)
             throws ResourceNotFoundException {
@@ -53,7 +53,7 @@ public class FormateurController {
         return ResponseEntity.ok().body(formateur);
     }
 
-    @PutMapping("/formateurs/update/{id}")
+    @PutMapping("/formateurs/{id}")
     public ResponseEntity<Formateur> updateFormateur(
             @PathVariable(value = "id") Long formateurId,@Valid @RequestBody Formateur formateurDetails) throws ResourceNotFoundException {
     	Formateur formateur = formateurService.getFormateurById(formateurId).orElseThrow(() -> new ResourceNotFoundException("Formateur introuvable avec le code = " + formateurId));
@@ -68,7 +68,7 @@ public class FormateurController {
         return ResponseEntity.ok(updatedFormateur);
     }
 
-    @DeleteMapping("/formateurs/delete/{id}")
+    @DeleteMapping("/formateurs/{id}")
     public Map<String, Boolean> deleteFormateur(
             @PathVariable(value = "id") Long formateurId)
             throws ResourceNotFoundException {

@@ -24,17 +24,17 @@ public class OrganismeController {
     private OrganismeRepository organismeRepository;
 
     //@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/organismes/all")
+    @GetMapping("/organismes")
     public List<Organisme> getAllOrganismes() {
         return organismeService.getAllOrganismes();
     }
 
-    @PostMapping("/organismes/new")
+    @PostMapping("/organismes")
     public Long createOrganisme(@Valid @RequestBody Organisme organisme) {
         return organismeService.createOrganisme(organisme);
     }
 
-    @GetMapping("/organismes/get/{id}")
+    @GetMapping("/organismes/{id}")
     public ResponseEntity<Organisme> getOrganismeById(
             @PathVariable(value = "id") Long organismeId)
             throws ResourceNotFoundException {
@@ -43,7 +43,7 @@ public class OrganismeController {
         return ResponseEntity.ok().body(organisme);
     }
 
-    @PutMapping("/organismes/update/{id}")
+    @PutMapping("/organismes/{id}")
     public ResponseEntity<Organisme> updateOrganisme(
             @PathVariable(value = "id") Long organismeId,@Valid @RequestBody Organisme organismeDetails) throws ResourceNotFoundException {
         Organisme organisme = organismeService.getOrganismeById(organismeId).orElseThrow(() -> new ResourceNotFoundException("Organisme introuvable avec le code = " + organismeId));
@@ -55,7 +55,7 @@ public class OrganismeController {
         return ResponseEntity.ok(updatedOrganisme);
     }
 
-    @DeleteMapping("/organismes/delete/{id}")
+    @DeleteMapping("/organismes/{id}")
     public Map<String, Boolean> deleteOrganisme(
             @PathVariable(value = "id") Long organismeId)
             throws ResourceNotFoundException {

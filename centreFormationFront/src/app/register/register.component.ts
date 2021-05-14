@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
+import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { RegisterModel } from '../models/register.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

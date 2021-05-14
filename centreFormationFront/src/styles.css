@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "~material-design-icons/iconfont/material-icons.css";
 html,
 body {
   height: 100%;
@@ -10,4 +10,12 @@ body {
 }
 .spacer {
   flex: 1 1 auto;
+}
+
+.card {
+  margin: 20px;
+}
+
+table {
+  width: 100%;
 }

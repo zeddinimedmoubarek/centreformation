@@ -6,7 +6,7 @@ import { TokenStorageService } from '../_services/token-storage.service';
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.css']
+  styleUrls: ['./side-nav.component.css'],
 })
 export class SideNavComponent {
   private roles: string[];
@@ -15,17 +15,22 @@ export class SideNavComponent {
   showModeratorBoard = false;
   username: string;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map((result) => result.matches),
       shareReplay()
     );
+  router: any;
 
-  constructor(private breakpointObserver: BreakpointObserver , private tokenStorageService: TokenStorageService) {}
-  ngOnInit() : void{
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private tokenStorageService: TokenStorageService
+  ) {}
+  ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
-    if (this.isLoggedIn){
+    if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
@@ -35,7 +40,6 @@ export class SideNavComponent {
       this.username = user.username;
     }
   }
-
   logout() {
     this.tokenStorageService.signOut();
     window.location.reload();

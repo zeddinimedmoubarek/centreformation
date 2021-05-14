@@ -23,17 +23,17 @@ public class ProfilController {
     private ProfilRepository profilRepository;
 
     //@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/profils/all")
+    @GetMapping("/profil")
     public List<Profil> getAllProfils() {
         return profilService.getAllProfils();
     }
 
-    @PostMapping("/profils/new")
+    @PostMapping("/profil")
     public Long createProfil(@Valid @RequestBody Profil profil) {
         return profilService.createProfil(profil);
     }
 
-    @GetMapping("/profils/get/{id}")
+    @GetMapping("/profil/{id}")
     public ResponseEntity<Profil> getProfilById(
             @PathVariable(value = "id") Long profilId)
             throws ResourceNotFoundException {
@@ -42,18 +42,17 @@ public class ProfilController {
         return ResponseEntity.ok().body(profil);
     }
 
-    @PutMapping("/profils/update/{id}")
+    @PutMapping("/profil/{id}")
     public ResponseEntity<Profil> updateProfil(
             @PathVariable(value = "id") Long profilId,@Valid @RequestBody Profil profilDetails) throws ResourceNotFoundException {
         Profil profil = profilService.getProfilById(profilId).orElseThrow(() -> new ResourceNotFoundException("Profil introuvable avec le code = " + profilId));
         profil.setLibelle(profilDetails.getLibelle());
-        profil.setParticipants(profilDetails.getParticipants());
 
         final Profil updatedProfil = profilRepository.save(profil);
         return ResponseEntity.ok(updatedProfil);
     }
 
-    @DeleteMapping("/profils/delete/{id}")
+    @DeleteMapping("/profil/{id}")
     public Map<String, Boolean> deleteProfil(
             @PathVariable(value = "id") Long profilId)
             throws ResourceNotFoundException {

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { LoginModel } from '../models/login.model';
-import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
+import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
     private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private router: Router) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()){
@@ -52,7 +54,10 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+        this.redirect();
+        //this.reloadPage();
+        //this.delay(3000);
+
       },
       err => {
         this.errorMessage = err.error.message;
@@ -69,4 +74,10 @@ export class LoginComponent implements OnInit {
   reloadPage(){
     window.location.reload();
   }
+  redirect() {
+    this.router.navigate(['./'], { skipLocationChange: false });
+  }
+  private delay(ms: number){
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 }

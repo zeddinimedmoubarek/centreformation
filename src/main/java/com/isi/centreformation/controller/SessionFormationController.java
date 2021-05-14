@@ -32,17 +32,17 @@ public class SessionFormationController {
     private SessionFormationRepository sessionformationRepository;
     
 	//@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/Sessionformations/all")
+    @GetMapping("/Sessionformations")
     public List<SessionFormation> getAllSessionFormations() {
         return sessionFormationService.getAllSessionFormations();
     }
     
-    @PostMapping("/Sessionformations/new")
+    @PostMapping("/Sessionformations")
     public Long createFormation(@Valid @RequestBody SessionFormation sessionformation) {
         return sessionFormationService.createSessionFormation(sessionformation);
     }
 
-    @GetMapping("/Sessionformations/get/{id}")
+    @GetMapping("/Sessionformations/id}")
     public ResponseEntity<SessionFormation> getSessionFormationById(
             @PathVariable(value = "id") Long sessionformationId)
             throws ResourceNotFoundException {
@@ -51,7 +51,7 @@ public class SessionFormationController {
         return ResponseEntity.ok().body(sessionformation);
     }
 
-    @PutMapping("/Sessionformations/update/{id}")
+    @PutMapping("/Sessionformations/{id}")
     public ResponseEntity<SessionFormation> updateSessionFormation(
             @PathVariable(value = "id") Long sessionformationId,@Valid @RequestBody SessionFormation sessionformationDetails) throws ResourceNotFoundException {
     	SessionFormation sessionformation = sessionFormationService.getSessionFormationById(sessionformationId).orElseThrow(() -> new ResourceNotFoundException("SessionFormation introuvable avec le code = " + sessionformationId));
@@ -61,7 +61,7 @@ public class SessionFormationController {
         return ResponseEntity.ok(updatedSessionFormation);
     }
 
-    @DeleteMapping("/Sessionformations/delete/{id}")
+    @DeleteMapping("/Sessionformations/{id}")
     public Map<String, Boolean> deleteSessionFormation(
             @PathVariable(value = "id") Long sessionformationId)
             throws ResourceNotFoundException {

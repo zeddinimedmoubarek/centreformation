@@ -23,14 +23,11 @@ public class Pays implements Serializable {
     @Column(name = "libelle")
     private String libelle;
 
-    @OneToMany(mappedBy = "pays")
-    private Set<Participant> participants = new HashSet<>();
 
-	public Pays(Long id, String libelle, Set<Participant> participants) {
+	public Pays(Long id, String libelle) {
 		super();
 		this.id = id;
 		this.libelle = libelle;
-		this.participants = participants;
 	}
 
 	public Pays() {
@@ -53,19 +50,12 @@ public class Pays implements Serializable {
 		this.libelle = libelle;
 	}
 
-	public Set<Participant> getParticipantInternationals() {
-		return participants;
-	}
-
-	public void setParticipantInternationals(Set<Participant> participants) {
-		this.participants = participants;
-	}
 
 	@Override
 	public String toString() {
-		return "Pays [id=" + id + ", libelle=" + libelle + ", participantInternationals=" + participants
-				+ "]";
+		return "Pays{" +
+				"id=" + id +
+				", libelle='" + libelle + '\'' +
+				'}';
 	}
-
-    
 }

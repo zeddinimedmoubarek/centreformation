@@ -23,17 +23,17 @@ public class PaysController {
     private PaysRepository paysRepository;
 
     //@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/pays/all")
-    public List<Pays> getAllPayss() {
+    @GetMapping("/pays")
+    public List<Pays> getAllPays() {
         return paysService.getAllPays();
     }
 
-    @PostMapping("/pays/new")
+    @PostMapping("/pays")
     public Long createPays(@Valid @RequestBody Pays pays) {
         return paysService.createPays(pays);
     }
 
-    @GetMapping("/pays/get/{id}")
+    @GetMapping("/pays/{id}")
     public ResponseEntity<Pays> getPaysById(
             @PathVariable(value = "id") Long paysId)
             throws ResourceNotFoundException {
@@ -42,18 +42,18 @@ public class PaysController {
         return ResponseEntity.ok().body(pays);
     }
 
-    @PutMapping("/pays/update/{id}")
+    @PutMapping("/pays/{id}")
     public ResponseEntity<Pays> updatePays(
             @PathVariable(value = "id") Long paysId,@Valid @RequestBody Pays paysDetails) throws ResourceNotFoundException {
         Pays pays = paysService.getPaysById(paysId).orElseThrow(() -> new ResourceNotFoundException("Pays introuvable avec le code = " + paysId));
         pays.setLibelle(paysDetails.getLibelle());
-        pays.setParticipantInternationals(paysDetails.getParticipantInternationals());
+        //pays.setParticipantInternationals(paysDetails.getParticipantInternationals());
 
         final Pays updatedPays = paysRepository.save(pays);
         return ResponseEntity.ok(updatedPays);
     }
 
-    @DeleteMapping("/pays/delete/{id}")
+    @DeleteMapping("/pays/{id}")
     public Map<String, Boolean> deletePays(
             @PathVariable(value = "id") Long paysId)
             throws ResourceNotFoundException {

@@ -23,14 +23,10 @@ public class Profil implements Serializable {
     @Column(name = "libelle")
     private String libelle;
 
-    @OneToMany(mappedBy = "profil")
-    private Set<Participant> participants = new HashSet<>();
-
-	public Profil(Long id, String libelle, Set<Participant> participants) {
+	public Profil(Long id, String libelle) {
 		super();
 		this.id = id;
 		this.libelle = libelle;
-		this.participants = participants;
 	}
 
 	public Profil() {
@@ -53,18 +49,11 @@ public class Profil implements Serializable {
 		this.libelle = libelle;
 	}
 
-	public Set<Participant> getParticipants() {
-		return participants;
-	}
-
-	public void setParticipants(Set<Participant> participants) {
-		this.participants = participants;
-	}
-
 	@Override
 	public String toString() {
-		return "Profil [id=" + id + ", libelle=" + libelle + ", participants=" + participants + "]";
+		return "Profil{" +
+				"id=" + id +
+				", libelle='" + libelle + '\'' +
+				'}';
 	}
-
-    
 }

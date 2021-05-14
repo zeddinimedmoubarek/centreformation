@@ -32,17 +32,17 @@ public class FormationController {
     private FormationService formationService;
     
 	//@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/formations/all")
+    @GetMapping("/formations")
     public List<Formation> getAllFormations() {
         return formationService.getAllFormations();
     }
     
-    @PostMapping("/formations/new")
+    @PostMapping("/formations")
     public Long createFormation(@Valid @RequestBody Formation formation) {
         return formationService.createFormation(formation);
     }
 
-    @GetMapping("/formations/get/{id}")
+    @GetMapping("/formations/{id}")
     public ResponseEntity<Formation> getFormationById(
             @PathVariable(value = "id") Long formationId)
             throws ResourceNotFoundException {
@@ -51,7 +51,7 @@ public class FormationController {
         return ResponseEntity.ok().body(formation);
     }
 
-    @PutMapping("/formations/update/{id}")
+    @PutMapping("/formations/{id}")
     public ResponseEntity<Formation> updateFormation(
             @PathVariable(value = "id") Long formationId,@Valid @RequestBody Formation formationDetails) throws ResourceNotFoundException {
     	Formation formation = formationService.getFormationById(formationId).orElseThrow(() -> new ResourceNotFoundException("Formation introuvable avec le code = " + formationId));
@@ -66,7 +66,7 @@ public class FormationController {
         return ResponseEntity.ok(updatedFormation);
     }
 
-    @DeleteMapping("/formations/delete/{id}")
+    @DeleteMapping("/formations/{id}")
     public Map<String, Boolean> deleteFormation(
             @PathVariable(value = "id") Long formationId)
             throws ResourceNotFoundException {
