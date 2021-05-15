@@ -19,6 +19,7 @@ public class Formateur implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "formateur_id")
     private Long id;
 
     @Column(name = "nom")
@@ -36,15 +37,11 @@ public class Formateur implements Serializable {
     @Column(name = "type")
     private String type;
 
-    @OneToMany(mappedBy = "formateur")
-    private Set<SessionFormation> sessionFormations = new HashSet<>();
-
     @ManyToOne
-    @JsonIgnoreProperties(value = "formateurs", allowSetters = true)
+    @JoinColumn(name = "organisme_id")
     private Organisme organisme;
 
-	public Formateur(Long id, String nom, String prenom, String email, String tel, String type,
-			Set<SessionFormation> sessionFormations, Organisme organisme) {
+	public Formateur(Long id, String nom, String prenom, String email, String tel, String type, Organisme organisme) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -52,7 +49,6 @@ public class Formateur implements Serializable {
 		this.email = email;
 		this.tel = tel;
 		this.type = type;
-		this.sessionFormations = sessionFormations;
 		this.organisme = organisme;
 	}
 
@@ -108,14 +104,6 @@ public class Formateur implements Serializable {
 		this.type = type;
 	}
 
-	public Set<SessionFormation> getSessionFormations() {
-		return sessionFormations;
-	}
-
-	public void setSessionFormations(Set<SessionFormation> sessionFormations) {
-		this.sessionFormations = sessionFormations;
-	}
-
 	public Organisme getOrganisme() {
 		return organisme;
 	}
@@ -126,9 +114,14 @@ public class Formateur implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Formateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", tel=" + tel
-				+ ", type=" + type + ", sessionFormations=" + sessionFormations + ", organisme=" + organisme + "]";
+		return "Formateur{" +
+				"id=" + id +
+				", nom='" + nom + '\'' +
+				", prenom='" + prenom + '\'' +
+				", email='" + email + '\'' +
+				", tel='" + tel + '\'' +
+				", type='" + type + '\'' +
+				", organisme=" + organisme +
+				'}';
 	}
-
-   
 }

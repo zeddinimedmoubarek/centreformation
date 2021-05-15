@@ -48,8 +48,6 @@ public class OrganismeController {
             @PathVariable(value = "id") Long organismeId,@Valid @RequestBody Organisme organismeDetails) throws ResourceNotFoundException {
         Organisme organisme = organismeService.getOrganismeById(organismeId).orElseThrow(() -> new ResourceNotFoundException("Organisme introuvable avec le code = " + organismeId));
         organisme.setLibelle(organismeDetails.getLibelle());
-        organisme.setFormateurs(organismeDetails.getFormateurs());
-        organisme.setSessionFormations(organismeDetails.getSessionFormations());
 
         final Organisme updatedOrganisme = organismeRepository.save(organisme);
         return ResponseEntity.ok(updatedOrganisme);

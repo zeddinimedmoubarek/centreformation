@@ -42,11 +42,11 @@ public class SessionFormation implements Serializable {
     private Set<Participant> participants = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "sessionFormations", allowSetters = true)
+    @JoinColumn(name = "formateur_id")
     private Formateur formateur;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "sessionFormations", allowSetters = true)
+    @JoinColumn(name = "organisme_id")
     private Organisme organisme;
 
     @ManyToMany(mappedBy = "nbSessions")

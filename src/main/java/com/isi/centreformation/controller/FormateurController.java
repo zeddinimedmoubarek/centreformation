@@ -61,7 +61,6 @@ public class FormateurController {
         formateur.setNom(formateurDetails.getNom());
         formateur.setOrganisme(formateurDetails.getOrganisme());
         formateur.setPrenom(formateurDetails.getPrenom());
-        formateur.setSessionFormations(formateurDetails.getSessionFormations());
         formateur.setTel(formateurDetails.getTel());
       
         final Formateur updatedFormateur = formateurRepository.save(formateur);

@@ -18,26 +18,15 @@ public class Organisme implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "organisme_id")
     private Long id;
 
     @Column(name = "libelle")
     private String libelle;
 
-    @OneToMany(mappedBy = "organisme")
-    private Set<SessionFormation> sessionFormations = new HashSet<>();
-
-    @OneToMany(mappedBy = "organisme")
-    private Set<Formateur> formateurs = new HashSet<>();
-
-	@OneToMany(mappedBy = "organisme")
-	private Set<Participant> participants = new HashSet<>();
-
-	public Organisme(Long id, String libelle, Set<SessionFormation> sessionFormations, Set<Formateur> formateurs, Set<Participant> participants) {
+	public Organisme(Long id, String libelle) {
 		this.id = id;
 		this.libelle = libelle;
-		this.sessionFormations = sessionFormations;
-		this.formateurs = formateurs;
-		this.participants = participants;
 	}
 
 	public Organisme() {
@@ -60,38 +49,11 @@ public class Organisme implements Serializable {
 		this.libelle = libelle;
 	}
 
-	public Set<SessionFormation> getSessionFormations() {
-		return sessionFormations;
-	}
-
-	public void setSessionFormations(Set<SessionFormation> sessionFormations) {
-		this.sessionFormations = sessionFormations;
-	}
-
-	public Set<Formateur> getFormateurs() {
-		return formateurs;
-	}
-
-	public void setFormateurs(Set<Formateur> formateurs) {
-		this.formateurs = formateurs;
-	}
-
-	public Set<Participant> getParticipantNationals() {
-		return participants;
-	}
-
-	public void setParticipantNationals(Set<Participant> participants) {
-		this.participants = participants;
-	}
-
 	@Override
 	public String toString() {
 		return "Organisme{" +
 				"id=" + id +
 				", libelle='" + libelle + '\'' +
-				", sessionFormations=" + sessionFormations +
-				", formateurs=" + formateurs +
-				", participantsNationals=" + participants +
 				'}';
 	}
 }
