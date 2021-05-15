@@ -27,14 +27,11 @@ public class Formation implements Serializable {
     @Column(name = "type_formation")
     private String typeFormation;
 
-    @Column(name = "nb_session")
-    private String nbSession;
-
     @Column(name = "duree")
     private String duree;
 
     @Column(name = "budget")
-    private String budget;
+    private Double budget;
 
     @ManyToMany
     @JoinTable(name = "formation_nb_session",
@@ -43,16 +40,15 @@ public class Formation implements Serializable {
     private Set<SessionFormation> nbSessions = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "formations", allowSetters = true)
+	@JoinColumn(name = "id_domaine")
     private Domaine domaine;
 
-	public Formation(Long id, String titre, String typeFormation, String nbSession, String duree, String budget,
+	public Formation(Long id, String titre, String typeFormation,String duree, Double budget,
 			Set<SessionFormation> nbSessions, Domaine domaine) {
 		super();
 		this.id = id;
 		this.titre = titre;
 		this.typeFormation = typeFormation;
-		this.nbSession = nbSession;
 		this.duree = duree;
 		this.budget = budget;
 		this.nbSessions = nbSessions;
@@ -87,14 +83,6 @@ public class Formation implements Serializable {
 		this.typeFormation = typeFormation;
 	}
 
-	public String getNbSession() {
-		return nbSession;
-	}
-
-	public void setNbSession(String nbSession) {
-		this.nbSession = nbSession;
-	}
-
 	public String getDuree() {
 		return duree;
 	}
@@ -103,11 +91,11 @@ public class Formation implements Serializable {
 		this.duree = duree;
 	}
 
-	public String getBudget() {
+	public Double getBudget() {
 		return budget;
 	}
 
-	public void setBudget(String budget) {
+	public void setBudget(Double budget) {
 		this.budget = budget;
 	}
 
@@ -129,10 +117,14 @@ public class Formation implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Formation [id=" + id + ", titre=" + titre + ", typeFormation=" + typeFormation + ", nbSession="
-				+ nbSession + ", duree=" + duree + ", budget=" + budget + ", nbSessions=" + nbSessions + ", domaine="
-				+ domaine + "]";
+		return "Formation{" +
+				"id=" + id +
+				", titre='" + titre + '\'' +
+				", typeFormation='" + typeFormation + '\'' +
+				", duree='" + duree + '\'' +
+				", budget='" + budget + '\'' +
+				", nbSessions=" + nbSessions +
+				", domaine=" + domaine +
+				'}';
 	}
-
-    
 }

@@ -32,17 +32,17 @@ public class FormationController {
     private FormationService formationService;
     
 	//@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/formations")
+    @GetMapping("/formation")
     public List<Formation> getAllFormations() {
         return formationService.getAllFormations();
     }
     
-    @PostMapping("/formations")
+    @PostMapping("/formation")
     public Long createFormation(@Valid @RequestBody Formation formation) {
         return formationService.createFormation(formation);
     }
 
-    @GetMapping("/formations/{id}")
+    @GetMapping("/formation/{id}")
     public ResponseEntity<Formation> getFormationById(
             @PathVariable(value = "id") Long formationId)
             throws ResourceNotFoundException {
@@ -51,22 +51,22 @@ public class FormationController {
         return ResponseEntity.ok().body(formation);
     }
 
-    @PutMapping("/formations/{id}")
+    @PutMapping("/formation/{id}")
     public ResponseEntity<Formation> updateFormation(
             @PathVariable(value = "id") Long formationId,@Valid @RequestBody Formation formationDetails) throws ResourceNotFoundException {
     	Formation formation = formationService.getFormationById(formationId).orElseThrow(() -> new ResourceNotFoundException("Formation introuvable avec le code = " + formationId));
       formation.setBudget(formationDetails.getBudget());
       formation.setDomaine(formationDetails.getDomaine());
       formation.setDuree(formationDetails.getDuree());
-      formation.setNbSession(formationDetails.getNbSession());
       formation.setTitre(formationDetails.getTitre());
       formation.setTypeFormation(formationDetails.getTypeFormation());
+      formation.setNbSessions(formationDetails.getNbSessions());
       
         final Formation updatedFormation = formationRepository.save(formation);
         return ResponseEntity.ok(updatedFormation);
     }
 
-    @DeleteMapping("/formations/{id}")
+    @DeleteMapping("/formation/{id}")
     public Map<String, Boolean> deleteFormation(
             @PathVariable(value = "id") Long formationId)
             throws ResourceNotFoundException {

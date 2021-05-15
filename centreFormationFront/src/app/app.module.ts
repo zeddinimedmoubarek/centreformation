@@ -65,6 +65,8 @@ import { ProfilComponent } from './profil/profil.component';
 import { ListProfilComponent } from './list-profil/list-profil.component';
 import { DomaineComponent } from './domaine/domaine.component';
 import { ListDomaineComponent } from './list-domaine/list-domaine.component';
+import { FormationComponent } from './formation/formation.component';
+import { ListFormationComponent } from './list-formation/list-formation.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import { ListDomaineComponent } from './list-domaine/list-domaine.component';
     ListProfilComponent,
     DomaineComponent,
     ListDomaineComponent,
+    FormationComponent,
+    ListFormationComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -149,6 +153,7 @@ import { ListDomaineComponent } from './list-domaine/list-domaine.component';
     OrganismeComponent,
     ProfilComponent,
     DomaineComponent,
+    FormationComponent,
   ],
 })
 export class AppModule {}

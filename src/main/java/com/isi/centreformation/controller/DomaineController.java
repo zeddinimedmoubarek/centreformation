@@ -48,7 +48,7 @@ public class DomaineController {
             @PathVariable(value = "id") Long domaineId, @Valid @RequestBody Domaine domaineDetails) throws ResourceNotFoundException {
         Domaine domaine = domaineService.getDomaineById(domaineId).orElseThrow(() -> new ResourceNotFoundException("Domaine introuvable avec le code = " + domaineId));
         domaine.setLibelle(domaineDetails.getLibelle());
-        domaine.setFormations(domaineDetails.getFormations());
+        //domaine.setFormations(domaineDetails.getFormations());
 
         final Domaine updatedDomaine = domaineRepository.save(domaine);
         return ResponseEntity.ok(updatedDomaine);
