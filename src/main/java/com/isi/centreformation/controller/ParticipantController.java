@@ -24,17 +24,17 @@ public class ParticipantController {
     private ParticipantRepository participantRepository;
 
     //@PreAuthorize("hasRole('ADMIN')") // ki hachtik b admin bark ya3mlha
-    @GetMapping("/participants")
+    @GetMapping("/participant")
     public List<Participant> getAllParticipants() {
         return participantService.getAllParticipants();
     }
 
-    @PostMapping("/participants")
+    @PostMapping("/participant")
     public Long createParticipant(@Valid @RequestBody Participant participant) {
         return participantService.createParticipant(participant);
     }
 
-    @GetMapping("/participants/{id}")
+    @GetMapping("/participant/{id}")
     public ResponseEntity<Participant> getParticipantById(
             @PathVariable(value = "id") Long participantId)
             throws ResourceNotFoundException {
@@ -43,7 +43,7 @@ public class ParticipantController {
         return ResponseEntity.ok().body(participant);
     }
 
-    @PutMapping("/participants/{id}")
+    @PutMapping("/participant/{id}")
     public ResponseEntity<Participant> updateParticipant(
             @PathVariable(value = "id") Long participantId, @Valid @RequestBody Participant participantDetails) throws ResourceNotFoundException {
         Participant participant = participantService.getParticipantById(participantId).orElseThrow(() -> new ResourceNotFoundException("Participant introuvable avec le code = " + participantId));
@@ -61,7 +61,7 @@ public class ParticipantController {
         return ResponseEntity.ok(updatedParticipant);
     }
 
-    @DeleteMapping("/participants/{id}")
+    @DeleteMapping("/participant/{id}")
     public Map<String, Boolean> deleteParticipant(
             @PathVariable(value = "id") Long participantId)
             throws ResourceNotFoundException {
