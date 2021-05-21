@@ -27,10 +27,10 @@ public class SessionFormation implements Serializable {
     private String lieu;
 
     @Column(name = "date_debut")
-    private Instant dateDebut;
+    private String dateDebut;
 
     @Column(name = "date_fin")
-    private Instant dateFin;
+    private String dateFin;
 
     @Column(name = "nb_participant")
     private String nbParticipant;
@@ -53,7 +53,7 @@ public class SessionFormation implements Serializable {
     @JsonIgnore
     private Set<Formation> formations = new HashSet<>();
 
-	public SessionFormation(Long id, String lieu, Instant dateDebut, Instant dateFin, String nbParticipant,
+	public SessionFormation(Long id, String lieu, String dateDebut, String dateFin, String nbParticipant,
 			Set<Participant> participants, Formateur formateur, Organisme organisme, Set<Formation> formations) {
 		super();
 		this.id = id;
@@ -87,19 +87,19 @@ public class SessionFormation implements Serializable {
 		this.lieu = lieu;
 	}
 
-	public Instant getDateDebut() {
+	public String getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(Instant dateDebut) {
+	public void setDateDebut(String dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
-	public Instant getDateFin() {
+	public String getDateFin() {
 		return dateFin;
 	}
 
-	public void setDateFin(Instant dateFin) {
+	public void setDateFin(String dateFin) {
 		this.dateFin = dateFin;
 	}
 

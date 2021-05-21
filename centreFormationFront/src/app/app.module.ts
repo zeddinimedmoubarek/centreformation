@@ -29,7 +29,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -67,6 +67,12 @@ import { DomaineComponent } from './domaine/domaine.component';
 import { ListDomaineComponent } from './list-domaine/list-domaine.component';
 import { FormationComponent } from './formation/formation.component';
 import { ListFormationComponent } from './list-formation/list-formation.component';
+import { FormateurComponent } from './formateur/formateur.component';
+import { ListFormateurComponent } from './list-formateur/list-formateur.component';
+import { SessionFormationComponent } from './session-formation/session-formation.component';
+import { ListSessionFormationComponent } from './list-session-formation/list-session-formation.component';
+import { ParticipantComponent } from './participant/participant.component';
+import { ListParticipantComponent } from './list-participant/list-participant.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +94,12 @@ import { ListFormationComponent } from './list-formation/list-formation.componen
     ListDomaineComponent,
     FormationComponent,
     ListFormationComponent,
+    FormateurComponent,
+    ListFormateurComponent,
+    SessionFormationComponent,
+    ListSessionFormationComponent,
+    ParticipantComponent,
+    ListParticipantComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -138,6 +150,8 @@ import { ListFormationComponent } from './list-formation/list-formation.componen
     MatTableModule,
     CdkTableModule,
     MatDialogModule,
+    MatNativeDateModule,
+    //MatMomentDateModule,
   ],
   providers: [
     {
@@ -154,6 +168,9 @@ import { ListFormationComponent } from './list-formation/list-formation.componen
     ProfilComponent,
     DomaineComponent,
     FormationComponent,
+    FormateurComponent,
+    SessionFormationComponent,
+    ParticipantComponent,
   ],
 })
 export class AppModule {}

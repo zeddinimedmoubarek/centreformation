@@ -16,6 +16,12 @@ import { ListDomaineComponent } from './list-domaine/list-domaine.component';
 import { DomaineComponent } from './domaine/domaine.component';
 import { ListFormationComponent } from './list-formation/list-formation.component';
 import { FormationComponent } from './formation/formation.component';
+import { ListFormateurComponent } from './list-formateur/list-formateur.component';
+import { FormateurComponent } from './formateur/formateur.component';
+import { ListSessionFormationComponent } from './list-session-formation/list-session-formation.component';
+import { SessionFormationComponent } from './session-formation/session-formation.component';
+import { ParticipantComponent } from './participant/participant.component';
+import { ListParticipantComponent } from './list-participant/list-participant.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -29,11 +35,17 @@ const routes: Routes = [
   { path: 'profils', component: ListProfilComponent },
   { path: 'domaines', component: ListDomaineComponent },
   { path: 'formations', component: ListFormationComponent },
+  { path: 'sessionformations', component: ListSessionFormationComponent },
+  { path: 'formateurs', component: ListFormateurComponent },
+  { path: 'participants', component: ListParticipantComponent },
   { path: 'addUpdatePays', component: PaysComponent },
   { path: 'addUpdateOrganisme', component: OrganismeComponent },
   { path: 'addUpdateProfil', component: ProfileComponent },
   { path: 'addUpdateDomaine', component: DomaineComponent },
   { path: 'addUpdateFormation', component: FormationComponent },
+  { path: 'addUpdateSessionFormation', component: SessionFormationComponent },
+  { path: 'addUpdateFormateur', component: FormateurComponent },
+  { path: 'addUpdateParticipant', component: ParticipantComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

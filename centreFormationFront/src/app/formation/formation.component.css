@@ -1,0 +1,8 @@
+.btn-dialog-close {
+  position: inherit;
+  right: 0;
+  top: 0;
+  padding: 5px;
+  line-height: 14px;
+  min-width: auto;
+}

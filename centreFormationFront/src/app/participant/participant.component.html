@@ -1,0 +1,158 @@
+<button class="btn-dialog-close" mat-stroked-button (click)="onClose()">
+  <mat-icon>cancel</mat-icon>
+</button>
+
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title *ngIf="addMode">Add Participant</mat-card-title>
+      <mat-card-title *ngIf="!addMode">Update Participant</mat-card-title>
+    </mat-card-header>
+    <form
+      [formGroup]="participantForm"
+      (ngSubmit)="participantForm.valid && onSubmit()"
+      novalidate
+    >
+      <mat-card-content>
+        <section>
+          <input
+            disabled
+            id="id"
+            formControlName="id"
+            placeholder="Participant id"
+            type="hidden"
+            name="id"
+            [(ngModel)]="participant.id"
+            autocomplete="off"
+            [value]="participant.id"
+          />
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="nom"
+              matInput
+              formControlName="nom"
+              placeholder="Participant nom"
+              type="text"
+              name="nom"
+              [(ngModel)]="participant.nom"
+              autocomplete="off"
+              [value]="participant.nom"
+            />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="prenom"
+              matInput
+              formControlName="prenom"
+              placeholder="Participant prenom"
+              type="text"
+              name="prenom"
+              [(ngModel)]="participant.prenom"
+              autocomplete="off"
+              [value]="participant.prenom"
+            />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Participant Email</mat-label>
+            <input
+              id="email"
+              matInput
+              formControlName="email"
+              placeholder="pat@example.com"
+              required
+              name="email"
+              [(ngModel)]="participant.email"
+              autocomplete="off"
+            />
+          </mat-form-field>
+        </section>
+
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="tel"
+              matInput
+              formControlName="tel"
+              placeholder="Participant Telephone"
+              type="text"
+              name="tel"
+              [(ngModel)]="participant.tel"
+              autocomplete="off"
+              [value]="participant.tel"
+            />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Profil</mat-label>
+            <mat-select [(value)]="selectedProfil">
+              <mat-option
+                *ngFor="let profil of profils"
+                [(value)]="profil.id"
+                >{{ profil.libelle }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field>
+            <mat-label>Type Participant</mat-label>
+            <mat-select
+              [(value)]="participant.typeParticipant"
+              name="type"
+              id="type"
+              formControlName="typeParticipant"
+            >
+              <mat-option value="NATIONAL">National</mat-option>
+              <mat-option value="INTERNATIONAL">International</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Organisme</mat-label>
+            <mat-select [(value)]="selectedOrganisme">
+              <mat-option
+                *ngFor="let organisme of organismes"
+                [(value)]="organisme.id"
+                >{{ organisme.libelle }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Pays</mat-label>
+            <mat-select [(value)]="selectedPays">
+              <mat-option *ngFor="let pays of payss" [(value)]="pays.id">{{
+                pays.libelle
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <div class="button-row">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!participantForm.valid"
+            >
+              Save
+            </button>
+            <!-- <button mat-stroked-button color="warn" (click)="onClose()">
+              Cancel
+            </button> -->
+          </div>
+        </mat-card-actions>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

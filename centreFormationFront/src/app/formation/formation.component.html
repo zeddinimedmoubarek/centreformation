@@ -1,0 +1,120 @@
+<button class="btn-dialog-close" mat-stroked-button (click)="onClose()">
+  <mat-icon>cancel</mat-icon>
+</button>
+
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title *ngIf="addMode">Add Formation</mat-card-title>
+      <mat-card-title *ngIf="!addMode">Update Formation</mat-card-title>
+    </mat-card-header>
+    <form
+      [formGroup]="formationForm"
+      (ngSubmit)="formationForm.valid && onSubmit()"
+      novalidate
+    >
+      <mat-card-content>
+        <section>
+          <input
+            disabled
+            id="id"
+            formControlName="id"
+            placeholder="Formation id"
+            type="hidden"
+            name="id"
+            [(ngModel)]="formation.id"
+            autocomplete="off"
+            [value]="formation.id"
+          />
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="titre"
+              matInput
+              formControlName="titre"
+              placeholder="Formation titre"
+              type="text"
+              name="titre"
+              [(ngModel)]="formation.titre"
+              autocomplete="off"
+              [value]="formation.titre"
+            />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field>
+            <mat-label>Type Formation</mat-label>
+            <mat-select
+              [(value)]="formation.typeFormation"
+              name="type"
+              id="type"
+              formControlName="typeFormation"
+            >
+              <mat-option value="National">National</mat-option>
+              <mat-option value="International">International</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="duree"
+              matInput
+              formControlName="duree"
+              placeholder="Formation duree"
+              type="text"
+              name="duree"
+              [(ngModel)]="formation.duree"
+              autocomplete="off"
+              [value]="formation.duree"
+            />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="budget"
+              matInput
+              formControlName="budget"
+              placeholder="Formation budget"
+              type="text"
+              name="budget"
+              [(ngModel)]="formation.budget"
+              autocomplete="off"
+              [value]="formation.budget"
+            />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Domaine</mat-label>
+            <mat-select [(value)]="selectedDomaine">
+              <mat-option
+                *ngFor="let domaine of domaines"
+                [(value)]="domaine.id"
+                >{{ domaine.libelle }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <div class="button-row">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!formationForm.valid"
+            >
+              Save
+            </button>
+            <!-- <button mat-stroked-button color="warn" (click)="onClose()">
+              Cancel
+            </button> -->
+          </div>
+        </mat-card-actions>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

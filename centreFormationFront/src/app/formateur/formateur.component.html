@@ -1,0 +1,136 @@
+<button class="btn-dialog-close" mat-stroked-button (click)="onClose()">
+  <mat-icon>cancel</mat-icon>
+</button>
+
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title *ngIf="addMode">Add Formateur</mat-card-title>
+      <mat-card-title *ngIf="!addMode">Update Formateur</mat-card-title>
+    </mat-card-header>
+    <form
+      [formGroup]="formateurForm"
+      (ngSubmit)="formateurForm.valid && onSubmit()"
+      novalidate
+    >
+      <mat-card-content>
+        <section>
+          <input
+            disabled
+            id="id"
+            formControlName="id"
+            placeholder="Formateur id"
+            type="hidden"
+            name="id"
+            [(ngModel)]="formateur.id"
+            autocomplete="off"
+            [value]="formateur.id"
+          />
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="nom"
+              matInput
+              formControlName="nom"
+              placeholder="Formateur nom"
+              type="text"
+              name="nom"
+              [(ngModel)]="formateur.nom"
+              autocomplete="off"
+              [value]="formateur.nom"
+            />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="prenom"
+              matInput
+              formControlName="prenom"
+              placeholder="Formateur prenom"
+              type="text"
+              name="prenom"
+              [(ngModel)]="formateur.prenom"
+              autocomplete="off"
+              [value]="formateur.prenom"
+            />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Formateur Email</mat-label>
+            <input
+              id="email"
+              matInput
+              formControlName="email"
+              placeholder="pat@example.com"
+              required
+              name="email"
+              [(ngModel)]="formateur.email"
+              autocomplete="off"
+            />
+          </mat-form-field>
+        </section>
+
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="tel"
+              matInput
+              formControlName="tel"
+              placeholder="Formateur Telephone"
+              type="text"
+              name="tel"
+              [(ngModel)]="formateur.tel"
+              autocomplete="off"
+              [value]="formateur.tel"
+            />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field>
+            <mat-label>Type Formateur</mat-label>
+            <mat-select
+              [(value)]="formateur.type"
+              name="type"
+              id="type"
+              formControlName="type"
+            >
+              <mat-option value="National">National</mat-option>
+              <mat-option value="International">International</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Organisme</mat-label>
+            <mat-select [(value)]="selectedOrganisme">
+              <mat-option
+                *ngFor="let organisme of organismes"
+                [(value)]="organisme.id"
+                >{{ organisme.libelle }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <div class="button-row">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!formateurForm.valid"
+            >
+              Save
+            </button>
+            <!-- <button mat-stroked-button color="warn" (click)="onClose()">
+              Cancel
+            </button> -->
+          </div>
+        </mat-card-actions>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

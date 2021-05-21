@@ -1,0 +1,127 @@
+<button class="btn-dialog-close" mat-stroked-button (click)="onClose()">
+  <mat-icon>cancel</mat-icon>
+</button>
+
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title *ngIf="addMode">Add SessionFormation</mat-card-title>
+      <mat-card-title *ngIf="!addMode">Update SessionFormation</mat-card-title>
+    </mat-card-header>
+    <form
+      [formGroup]="sessionFormationForm"
+      (ngSubmit)="sessionFormationForm.valid && onSubmit()"
+      novalidate
+    >
+      <mat-card-content>
+        <section>
+          <input
+            disabled
+            id="id"
+            formControlName="id"
+            placeholder="SessionFormation id"
+            type="hidden"
+            name="id"
+            [(ngModel)]="sessionFormation.id"
+            autocomplete="off"
+            [value]="sessionFormation.id"
+          />
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Formateur</mat-label>
+            <mat-select [(value)]="selectedFormateur">
+              <mat-option
+                *ngFor="let formateur of formateurs"
+                [(value)]="formateur.id"
+                >{{ formateur.prenom }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Organisme</mat-label>
+            <mat-select [(value)]="selectedOrganisme">
+              <mat-option
+                *ngFor="let organisme of organismes"
+                [(value)]="organisme.id"
+                >{{ organisme.libelle }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="lieu"
+              matInput
+              formControlName="lieu"
+              placeholder="SessionFormation lieu"
+              type="text"
+              name="lieu"
+              [(ngModel)]="sessionFormation.lieu"
+              autocomplete="off"
+              [value]="sessionFormation.lieu"
+            />
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Date Début</mat-label>
+            <input
+              matInput
+              [matDatepicker]="pickerDebut"
+              id="dateDebut"
+              formControlName="dateDebut"
+              name="dateDebut"
+              [(ngModel)]="sessionFormation.dateDebut"
+              [value]="sessionFormation.dateDebut"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="pickerDebut"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #pickerDebut></mat-datepicker>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <mat-label>Date Fin</mat-label>
+            <input
+              matInput
+              [matDatepicker]="pickerFin"
+              id="dateFin"
+              formControlName="dateFin"
+              name="dateFin"
+              [(ngModel)]="sessionFormation.dateFin"
+              [value]="sessionFormation.dateFin"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="pickerFin"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #pickerFin></mat-datepicker>
+          </mat-form-field>
+        </section>
+
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <div class="button-row">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!sessionFormationForm.valid"
+            >
+              Save
+            </button>
+            <!-- <button mat-stroked-button color="warn" (click)="onClose()">
+              Cancel
+            </button> -->
+          </div>
+        </mat-card-actions>
+      </mat-card-content>
+    </form>
+  </mat-card>
+</div>

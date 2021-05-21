@@ -6,10 +6,16 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
+    *ngIf="isLoggedIn"
   >
     <mat-toolbar>Centre Formation</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="#" routerLink="/formations">Formations</a>
+      <a mat-list-item href="#" routerLink="/sessionformations"
+        >Sessions Formations</a
+      >
+      <a mat-list-item href="#" routerLink="/participants">Participants</a>
+      <a mat-list-item href="#" routerLink="/formateurs">Formateurs</a>
       <a mat-list-item href="#" routerLink="/pays">Pays</a>
       <a mat-list-item href="#" routerLink="/profils">Profiles</a>
       <a mat-list-item href="#" routerLink="/domaines">Domaines</a>
