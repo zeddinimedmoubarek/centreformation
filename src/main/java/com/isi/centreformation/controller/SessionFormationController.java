@@ -55,7 +55,14 @@ public class SessionFormationController {
     public ResponseEntity<SessionFormation> updateSessionFormation(
             @PathVariable(value = "id") Long sessionformationId,@Valid @RequestBody SessionFormation sessionformationDetails) throws ResourceNotFoundException {
     	SessionFormation sessionformation = sessionFormationService.getSessionFormationById(sessionformationId).orElseThrow(() -> new ResourceNotFoundException("SessionFormation introuvable avec le code = " + sessionformationId));
-      
+    	sessionformation.setDateDebut(sessionformationDetails.getDateDebut());
+    	sessionformation.setDateFin(sessionformationDetails.getDateFin());
+    	sessionformation.setFormateur(sessionformationDetails.getFormateur());
+    	sessionformation.setFormations(sessionformationDetails.getFormations());
+    	sessionformation.setLieu(sessionformationDetails.getLieu());
+    	sessionformation.setNbParticipants(sessionformationDetails.getNbParticipants());
+    	sessionformation.setParticipants(sessionformationDetails.getParticipants());
+    	sessionformation.setOrganisme(sessionformationDetails.getOrganisme());
       
         final SessionFormation updatedSessionFormation = sessionformationRepository.save(sessionformation);
         return ResponseEntity.ok(updatedSessionFormation);

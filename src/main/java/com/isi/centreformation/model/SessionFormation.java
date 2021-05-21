@@ -32,8 +32,8 @@ public class SessionFormation implements Serializable {
     @Column(name = "date_fin")
     private String dateFin;
 
-    @Column(name = "nb_participant")
-    private String nbParticipant;
+    @Column(name = "nb_participants")
+    private int nbParticipants;
 
     @ManyToMany
     @JoinTable(name = "session_formation_participant",
@@ -53,14 +53,14 @@ public class SessionFormation implements Serializable {
     @JsonIgnore
     private Set<Formation> formations = new HashSet<>();
 
-	public SessionFormation(Long id, String lieu, String dateDebut, String dateFin, String nbParticipant,
+	public SessionFormation(Long id, String lieu, String dateDebut, String dateFin, int nbParticipants,
 			Set<Participant> participants, Formateur formateur, Organisme organisme, Set<Formation> formations) {
 		super();
 		this.id = id;
 		this.lieu = lieu;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.nbParticipant = nbParticipant;
+		this.nbParticipants = nbParticipants;
 		this.participants = participants;
 		this.formateur = formateur;
 		this.organisme = organisme;
@@ -103,12 +103,12 @@ public class SessionFormation implements Serializable {
 		this.dateFin = dateFin;
 	}
 
-	public String getNbParticipant() {
-		return nbParticipant;
+	public int getNbParticipants() {
+		return nbParticipants;
 	}
 
-	public void setNbParticipant(String nbParticipant) {
-		this.nbParticipant = nbParticipant;
+	public void setNbParticipants(int nbParticipant) {
+		this.nbParticipants = nbParticipants;
 	}
 
 	public Set<Participant> getParticipants() {
@@ -146,7 +146,7 @@ public class SessionFormation implements Serializable {
 	@Override
 	public String toString() {
 		return "SessionFormation [id=" + id + ", lieu=" + lieu + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin
-				+ ", nbParticipant=" + nbParticipant + ", participants=" + participants + ", formateur=" + formateur
+				+ ", nbParticipant=" + nbParticipants + ", participants=" + participants + ", formateur=" + formateur
 				+ ", organisme=" + organisme + ", formations=" + formations + "]";
 	}
 
