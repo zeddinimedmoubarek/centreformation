@@ -116,6 +116,18 @@
         </section>
         <section>
           <mat-form-field appearance="legacy">
+            <mat-label>Session Formation</mat-label>
+            <mat-select [(value)]="selectedSessionFormation">
+              <mat-option
+                *ngFor="let sessionFormation of sessionsFormation"
+                [(value)]="sessionFormation.id"
+                >{{ sessionFormation.formation.titre }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
             <mat-label>Organisme</mat-label>
             <mat-select [(value)]="selectedOrganisme">
               <mat-option

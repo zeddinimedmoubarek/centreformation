@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
           verticalPosition: 'bottom',
           horizontalPosition: 'right',
         });
-        //this.redirect();
+        this.redirect();
         //this.reloadPage();
         //this.delay(3000);
       },

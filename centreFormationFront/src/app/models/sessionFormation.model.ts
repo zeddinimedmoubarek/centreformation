@@ -1,4 +1,5 @@
 import { FormateurModel } from './formateur.model';
+import { FormationModel } from './formation.model';
 import { OrganismeModel } from './organisme.model';
 
 export class SessionFormationModel {
@@ -8,5 +9,6 @@ export class SessionFormationModel {
   lieu: String;
   dateDebut: String;
   dateFin: String;
-  nbParticipant: any[];
+  formation: FormationModel;
+  nbParticipants: number;
 }

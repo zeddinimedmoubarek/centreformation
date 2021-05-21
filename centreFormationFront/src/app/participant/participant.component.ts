@@ -7,10 +7,12 @@ import { OrganismeModel } from '../models/organisme.model';
 import { ParticipantModel } from '../models/participant.model';
 import { PaysModel } from '../models/pays.model';
 import { ProfilModel } from '../models/profil.model';
+import { SessionFormationModel } from '../models/sessionFormation.model';
 import { OrganismeService } from '../services/organisme.service';
 import { ParticipantService } from '../services/participant.service';
 import { PaysService } from '../services/pays.service';
 import { ProfilService } from '../services/profil.service';
+import { SessionFormationService } from '../services/session-formation.service';
 
 @Component({
   selector: 'app-participant',
@@ -27,18 +29,22 @@ export class ParticipantComponent implements OnInit {
   organismes: OrganismeModel[];
   profils: ProfilModel[];
   payss: PaysModel[];
+  sessionsFormation: SessionFormationModel[];
   selectedOrganisme: any;
   selectedProfil: any;
   selectedPays: any;
   selectedTypeParticipant: any;
+  selectedSessionFormation: any;
   organisme: OrganismeModel = new OrganismeModel();
   profil: ProfilModel = new ProfilModel();
   pays: PaysModel = new PaysModel();
+  sessionFormation: SessionFormationModel[];
   constructor(
     private participantService: ParticipantService,
     private organismeService: OrganismeService,
     private profilService: ProfilService,
     private paysService: PaysService,
+    private sessionsFormationService: SessionFormationService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private router: Router,
@@ -54,6 +60,7 @@ export class ParticipantComponent implements OnInit {
     this.getOrganismes();
     this.getProfils();
     this.getPays();
+    this.getSessionsFormation();
     if (this.data == null) {
       this.addMode = true;
       this.participantForm = this.formBuilder.group({
@@ -212,6 +219,15 @@ export class ParticipantComponent implements OnInit {
       this.payss = data;
       console.log(this.payss);
     });
+  }
+
+  getSessionsFormation() {
+    this.sessionsFormationService
+      .getAllSessionFormation()
+      .subscribe((data: SessionFormationModel[]) => {
+        this.sessionsFormation = data;
+        console.log(this.sessionsFormation);
+      });
   }
   onClose() {
     this.dialogRef.close();

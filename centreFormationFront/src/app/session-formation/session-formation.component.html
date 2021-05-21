@@ -41,6 +41,19 @@
         </section>
         <section>
           <mat-form-field appearance="legacy">
+            <mat-label>Formation</mat-label>
+            <mat-select [(value)]="selectedFormation">
+              <mat-option
+                *ngFor="let formation of formations"
+                [(value)]="formation.id"
+                >{{ formation.titre }} ||
+                {{ formation.domaine.libelle }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
             <mat-label>Organisme</mat-label>
             <mat-select [(value)]="selectedOrganisme">
               <mat-option
@@ -102,6 +115,21 @@
               [for]="pickerFin"
             ></mat-datepicker-toggle>
             <mat-datepicker #pickerFin></mat-datepicker>
+          </mat-form-field>
+        </section>
+        <section>
+          <mat-form-field appearance="legacy">
+            <input
+              id="nbParticipants"
+              matInput
+              formControlName="nbParticipants"
+              placeholder="Nombre Participants max"
+              type="text"
+              name="nbParticipants"
+              [(ngModel)]="sessionFormation.nbParticipants"
+              autocomplete="off"
+              [value]="sessionFormation.nbParticipants"
+            />
           </mat-form-field>
         </section>
 

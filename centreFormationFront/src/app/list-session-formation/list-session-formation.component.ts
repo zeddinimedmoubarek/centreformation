@@ -26,6 +26,7 @@ export class ListSessionFormationComponent implements OnInit {
     'lieu',
     'dateDebut',
     'dateFin',
+    'nbParticipants',
     'actions',
   ];
   dataSource = new MatTableDataSource();
