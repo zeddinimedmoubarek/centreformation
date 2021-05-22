@@ -33,18 +33,16 @@ public class Formation implements Serializable {
     @Column(name = "budget")
     private Double budget;
 
-    @ManyToMany
-    @JoinTable(name = "formation_nb_session",
-               joinColumns = @JoinColumn(name = "formation_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "nb_session_id", referencedColumnName = "id"))
-    private Set<SessionFormation> nbSessions = new HashSet<>();
+    @Column(name = "nbSessions")
+	private int nbSessions;
+
 
     @ManyToOne
 	@JoinColumn(name = "id_domaine")
     private Domaine domaine;
 
 	public Formation(Long id, String titre, String typeFormation,String duree, Double budget,
-			Set<SessionFormation> nbSessions, Domaine domaine) {
+			int nbSessions, Domaine domaine) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -99,11 +97,20 @@ public class Formation implements Serializable {
 		this.budget = budget;
 	}
 
-	public Set<SessionFormation> getNbSessions() {
+	//public Set<SessionFormation> getNbSessions() {
+		//return nbSessions;
+	//}
+
+	//public void setNbSessions(Set<SessionFormation> nbSessions) {
+		//this.nbSessions = nbSessions;
+	//}
+
+
+	public int getNbSessions() {
 		return nbSessions;
 	}
 
-	public void setNbSessions(Set<SessionFormation> nbSessions) {
+	public void setNbSessions(int nbSessions) {
 		this.nbSessions = nbSessions;
 	}
 

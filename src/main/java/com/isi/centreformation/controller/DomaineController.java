@@ -30,7 +30,7 @@ public class DomaineController {
     }
 
     @PostMapping("/domaine")
-    public Long createDomaine(@Valid @RequestBody Domaine domaine) {
+    public Domaine createDomaine(@Valid @RequestBody Domaine domaine) {
         return domaineService.createDomaine(domaine);
     }
 

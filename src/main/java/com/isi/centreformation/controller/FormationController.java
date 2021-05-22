@@ -38,7 +38,7 @@ public class FormationController {
     }
     
     @PostMapping("/formation")
-    public Long createFormation(@Valid @RequestBody Formation formation) {
+    public Formation createFormation(@Valid @RequestBody Formation formation) {
         return formationService.createFormation(formation);
     }
 

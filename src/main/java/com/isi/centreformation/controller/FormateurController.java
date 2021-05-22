@@ -40,7 +40,7 @@ public class FormateurController {
     }
     
     @PostMapping("/formateur")
-    public Long createFormateur(@Valid @RequestBody Formateur formateur) {
+    public Formateur createFormateur(@Valid @RequestBody Formateur formateur) {
         return formateurService.createFormateur(formateur);
     }
 

@@ -32,10 +32,10 @@ public class PaysServiceImpl implements PaysService {
     }
 
     @Override
-    public Long createPays(Pays pays) {
+    public Pays createPays(Pays pays) {
         log.debug("Request to save Pays : {}", pays);
         pays = paysRepository.save(pays);
-        return pays.getId();
+        return pays;
     }
 
     @Override

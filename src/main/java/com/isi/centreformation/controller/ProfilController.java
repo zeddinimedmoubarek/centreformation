@@ -29,7 +29,7 @@ public class ProfilController {
     }
 
     @PostMapping("/profil")
-    public Long createProfil(@Valid @RequestBody Profil profil) {
+    public Profil createProfil(@Valid @RequestBody Profil profil) {
         return profilService.createProfil(profil);
     }
 

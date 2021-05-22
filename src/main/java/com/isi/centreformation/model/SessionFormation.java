@@ -49,12 +49,12 @@ public class SessionFormation implements Serializable {
     @JoinColumn(name = "organisme_id")
     private Organisme organisme;
 
-    @ManyToMany(mappedBy = "nbSessions")
-    @JsonIgnore
-    private Set<Formation> formations = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "formation_id")
+    private Formation formation;
 
 	public SessionFormation(Long id, String lieu, String dateDebut, String dateFin, int nbParticipants,
-			Set<Participant> participants, Formateur formateur, Organisme organisme, Set<Formation> formations) {
+			Set<Participant> participants, Formateur formateur, Organisme organisme, Formation formation) {
 		super();
 		this.id = id;
 		this.lieu = lieu;
@@ -64,7 +64,7 @@ public class SessionFormation implements Serializable {
 		this.participants = participants;
 		this.formateur = formateur;
 		this.organisme = organisme;
-		this.formations = formations;
+		this.formation = formation;
 	}
 
 	public SessionFormation() {
@@ -107,7 +107,7 @@ public class SessionFormation implements Serializable {
 		return nbParticipants;
 	}
 
-	public void setNbParticipants(int nbParticipant) {
+	public void setNbParticipants(int nbParticipants) {
 		this.nbParticipants = nbParticipants;
 	}
 
@@ -135,19 +135,19 @@ public class SessionFormation implements Serializable {
 		this.organisme = organisme;
 	}
 
-	public Set<Formation> getFormations() {
-		return formations;
+	public Formation getFormation() {
+		return formation;
 	}
 
-	public void setFormations(Set<Formation> formations) {
-		this.formations = formations;
+	public void setFormation(Formation formation) {
+		this.formation = formation;
 	}
 
 	@Override
 	public String toString() {
 		return "SessionFormation [id=" + id + ", lieu=" + lieu + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin
 				+ ", nbParticipant=" + nbParticipants + ", participants=" + participants + ", formateur=" + formateur
-				+ ", organisme=" + organisme + ", formations=" + formations + "]";
+				+ ", organisme=" + organisme + ", formation=" + formation + "]";
 	}
 
     

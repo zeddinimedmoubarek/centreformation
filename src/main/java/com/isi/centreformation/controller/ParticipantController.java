@@ -30,7 +30,7 @@ public class ParticipantController {
     }
 
     @PostMapping("/participant")
-    public Long createParticipant(@Valid @RequestBody Participant participant) {
+    public Participant createParticipant(@Valid @RequestBody Participant participant) {
         return participantService.createParticipant(participant);
     }
 

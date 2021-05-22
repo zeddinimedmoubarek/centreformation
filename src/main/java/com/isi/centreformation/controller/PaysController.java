@@ -29,7 +29,7 @@ public class PaysController {
     }
 
     @PostMapping("/pays")
-    public Long createPays(@Valid @RequestBody Pays pays) {
+    public Pays createPays(@Valid @RequestBody Pays pays) {
         return paysService.createPays(pays);
     }
 

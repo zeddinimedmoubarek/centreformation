@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface SessionFormationService {
     List<SessionFormation> getAllSessionFormations();
     Optional<SessionFormation> getSessionFormationById(Long id);
-    Long createSessionFormation(SessionFormation sessionFormation);
+    SessionFormation createSessionFormation(SessionFormation sessionFormation);
     void deleteSessionFormation(Long id);
 }

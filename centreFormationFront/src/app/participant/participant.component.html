@@ -119,7 +119,7 @@
             <mat-label>Session Formation</mat-label>
             <mat-select [(value)]="selectedSessionFormation">
               <mat-option
-                *ngFor="let sessionFormation of sessionsFormation"
+                *ngFor="let sessionFormation of sessionFormations"
                 [(value)]="sessionFormation.id"
                 >{{ sessionFormation.formation.titre }}</mat-option
               >

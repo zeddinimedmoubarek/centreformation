@@ -1,5 +1,6 @@
 package com.isi.centreformation.service;
 
+import com.isi.centreformation.model.Formateur;
 import com.isi.centreformation.model.Formation;
 import com.isi.centreformation.repository.FormationRepository;
 import org.slf4j.LoggerFactory;
@@ -32,10 +33,10 @@ public class FormationServiceImpl implements FormationService {
     }
 
     @Override
-    public Long createFormation(Formation formation) {
+    public Formation createFormation(Formation formation) {
         log.debug("Request to save formation : {}", formation);
         formation = formationRepository.save(formation);
-        return formation.getId();
+        return formation;
     }
 
     @Override

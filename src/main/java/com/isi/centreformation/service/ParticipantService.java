@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface ParticipantService {
     List<Participant> getAllParticipants();
     Optional<Participant> getParticipantById(Long id);
-    Long createParticipant(Participant participant);
+    Participant createParticipant(Participant participant);
     void deleteParticipant(Long id);
 }

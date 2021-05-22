@@ -37,10 +37,10 @@ public class FormateurServiceImpl implements FormateurService {
     }
 
     @Override
-    public Long createFormateur(Formateur formateur) {
+    public Formateur createFormateur(Formateur formateur) {
         log.debug("Request to save Formateur : {}", formateur);
         formateur = formateurRepository.save(formateur);
-        return formateur.getId();
+        return formateur;
     }
 
     @Override

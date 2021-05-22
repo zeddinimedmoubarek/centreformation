@@ -32,10 +32,10 @@ public class SessionFormationServiceImpl implements SessionFormationService {
     }
 
     @Override
-    public Long createSessionFormation(SessionFormation sessionFormation) {
+    public SessionFormation createSessionFormation(SessionFormation sessionFormation) {
         log.debug("Request to save SessionFormation : {}", sessionFormation);
         sessionFormation = sessionFormationRepository.save(sessionFormation);
-        return sessionFormation.getId();
+        return sessionFormation;
     }
 
     @Override

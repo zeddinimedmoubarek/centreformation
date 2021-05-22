@@ -1,6 +1,7 @@
 import { FormateurModel } from './formateur.model';
 import { FormationModel } from './formation.model';
 import { OrganismeModel } from './organisme.model';
+import { ParticipantModel } from './participant.model';
 
 export class SessionFormationModel {
   id: number;
@@ -10,5 +11,6 @@ export class SessionFormationModel {
   dateDebut: String;
   dateFin: String;
   formation: FormationModel;
+  participants: ParticipantModel[];
   nbParticipants: number;
 }

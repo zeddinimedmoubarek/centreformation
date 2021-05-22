@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface OrganismeService {
     List<Organisme> getAllOrganismes();
     Optional<Organisme> getOrganismeById(Long id);
-    Long createOrganisme(Organisme organisme);
+    Organisme createOrganisme(Organisme organisme);
     void deleteOrganisme(Long id);
 }

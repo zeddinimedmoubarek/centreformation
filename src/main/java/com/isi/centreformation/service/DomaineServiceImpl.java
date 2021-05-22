@@ -37,10 +37,10 @@ public class DomaineServiceImpl implements DomaineService {
     }
 
     @Override
-    public Long createDomaine(Domaine domaine) {
+    public Domaine createDomaine(Domaine domaine) {
         log.debug("Request to save Domaine : {}", domaine);
         domaine = domaineRepository.save(domaine);
-        return domaine.getId();
+        return domaine;
     }
 
     @Override

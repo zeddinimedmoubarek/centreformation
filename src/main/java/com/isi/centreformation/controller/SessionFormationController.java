@@ -38,7 +38,7 @@ public class SessionFormationController {
     }
     
     @PostMapping("/Sessionformation")
-    public Long createFormation(@Valid @RequestBody SessionFormation sessionformation) {
+    public SessionFormation createFormation(@Valid @RequestBody SessionFormation sessionformation) {
         return sessionFormationService.createSessionFormation(sessionformation);
     }
 
@@ -58,7 +58,7 @@ public class SessionFormationController {
     	sessionformation.setDateDebut(sessionformationDetails.getDateDebut());
     	sessionformation.setDateFin(sessionformationDetails.getDateFin());
     	sessionformation.setFormateur(sessionformationDetails.getFormateur());
-    	sessionformation.setFormations(sessionformationDetails.getFormations());
+    	sessionformation.setFormation(sessionformationDetails.getFormation());
     	sessionformation.setLieu(sessionformationDetails.getLieu());
     	sessionformation.setNbParticipants(sessionformationDetails.getNbParticipants());
     	sessionformation.setParticipants(sessionformationDetails.getParticipants());

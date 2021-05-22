@@ -4,8 +4,7 @@ package com.isi.centreformation.model;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+
 
 /**
  * A Domaine.
@@ -24,8 +23,6 @@ public class Domaine implements Serializable {
     @Column(name = "libelle")
     private String libelle;
 
-    //@OneToMany(mappedBy = "domaine", fetch = FetchType.LAZY)
-    //private Set<Formation> formations = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -43,21 +40,14 @@ public class Domaine implements Serializable {
 		this.libelle = libelle;
 	}
 
-	//public Set<Formation> getFormations() {
-		//return formations;
-	//}
-
-	//public void setFormations(Set<Formation> formations) {
-		//this.formations = formations;
-	//}
 
 
 
-	public Domaine(Long id, String libelle/*, Set<Formation> formations*/) {
+
+	public Domaine(Long id, String libelle) {
 		super();
 		this.id = id;
 		this.libelle = libelle;
-		//this.formations = formations;
 	}
 
 	public Domaine() {

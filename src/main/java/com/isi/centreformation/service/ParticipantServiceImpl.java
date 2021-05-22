@@ -32,10 +32,10 @@ public class ParticipantServiceImpl implements ParticipantService {
     }
 
     @Override
-    public Long createParticipant(Participant participant) {
+    public Participant createParticipant(Participant participant) {
         log.debug("Request to save Participant : {}", participant);
         participant = participantRepository.save(participant);
-        return participant.getId();
+        return participant;
     }
 
     @Override

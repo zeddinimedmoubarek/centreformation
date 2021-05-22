@@ -32,10 +32,10 @@ public class OrganismeServiceImpl implements OrganismeService {
     }
 
     @Override
-    public Long createOrganisme(Organisme organisme) {
+    public Organisme createOrganisme(Organisme organisme) {
         log.debug("Request to save Organisme : {}", organisme);
         organisme = organismeRepository.save(organisme);
-        return organisme.getId();
+        return organisme;
     }
 
     @Override

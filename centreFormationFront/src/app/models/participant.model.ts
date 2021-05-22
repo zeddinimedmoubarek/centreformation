@@ -13,5 +13,6 @@ export class ParticipantModel {
   profil: ProfilModel;
   pays: PaysModel;
   organisme: OrganismeModel;
-  sessionFormation: SessionFormationModel[];
+  sessionFormations: SessionFormationModel[];
+  //sessionFormation: SessionFormationModel;
 }

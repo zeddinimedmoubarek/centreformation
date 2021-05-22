@@ -30,7 +30,7 @@ public class OrganismeController {
     }
 
     @PostMapping("/organisme")
-    public Long createOrganisme(@Valid @RequestBody Organisme organisme) {
+    public Organisme createOrganisme(@Valid @RequestBody Organisme organisme) {
         return organismeService.createOrganisme(organisme);
     }
 

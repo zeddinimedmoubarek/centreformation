@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface DomaineService {
     List<Domaine> getAllDomaines();
     Optional<Domaine> getDomaineById(Long id);
-    Long createDomaine(Domaine domaine);
+    Domaine createDomaine(Domaine domaine);
     void deleteDomaine(Long id);
 }

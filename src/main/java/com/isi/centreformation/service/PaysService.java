@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface PaysService {
     List<Pays> getAllPays();
     Optional<Pays> getPaysById(Long id);
-    Long createPays(Pays pays);
+    Pays createPays(Pays pays);
     void deletePays(Long id);
 }

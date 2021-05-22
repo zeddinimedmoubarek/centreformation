@@ -29,7 +29,7 @@ export class ParticipantComponent implements OnInit {
   organismes: OrganismeModel[];
   profils: ProfilModel[];
   payss: PaysModel[];
-  sessionsFormation: SessionFormationModel[];
+  sessionFormations: SessionFormationModel[];
   selectedOrganisme: any;
   selectedProfil: any;
   selectedPays: any;
@@ -225,8 +225,8 @@ export class ParticipantComponent implements OnInit {
     this.sessionsFormationService
       .getAllSessionFormation()
       .subscribe((data: SessionFormationModel[]) => {
-        this.sessionsFormation = data;
-        console.log(this.sessionsFormation);
+        this.sessionFormations = data;
+        console.log(this.sessionFormations);
       });
   }
   onClose() {

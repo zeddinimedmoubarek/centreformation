@@ -32,10 +32,10 @@ public class ProfilServiceImpl implements ProfilService {
     }
 
     @Override
-    public Long createProfil(Profil profil) {
+    public Profil createProfil(Profil profil) {
         log.debug("Request to save Profil : {}", profil);
         profil = profilRepository.save(profil);
-        return profil.getId();
+        return profil;
     }
 
     @Override

@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface ProfilService {
     List<Profil> getAllProfils();
     Optional<Profil> getProfilById(Long id);
-    Long createProfil(Profil profil);
+    Profil createProfil(Profil profil);
     void deleteProfil(Long id);
 }
