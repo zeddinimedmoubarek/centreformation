@@ -38,7 +38,7 @@ export class ParticipantComponent implements OnInit {
   organisme: OrganismeModel = new OrganismeModel();
   profil: ProfilModel = new ProfilModel();
   pays: PaysModel = new PaysModel();
-  sessionFormation: SessionFormationModel[];
+  sessionFormation: SessionFormationModel;
   constructor(
     private participantService: ParticipantService,
     private organismeService: OrganismeService,
@@ -60,7 +60,7 @@ export class ParticipantComponent implements OnInit {
     this.getOrganismes();
     this.getProfils();
     this.getPays();
-    this.getSessionsFormation();
+    this.getSessionFormations();
     if (this.data == null) {
       this.addMode = true;
       this.participantForm = this.formBuilder.group({
@@ -221,12 +221,13 @@ export class ParticipantComponent implements OnInit {
     });
   }
 
-  getSessionsFormation() {
+  getSessionFormations() {
     this.sessionsFormationService
       .getAllSessionFormation()
       .subscribe((data: SessionFormationModel[]) => {
         this.sessionFormations = data;
         console.log(this.sessionFormations);
+        //console.log(this.sessionFormations.);
       });
   }
   onClose() {

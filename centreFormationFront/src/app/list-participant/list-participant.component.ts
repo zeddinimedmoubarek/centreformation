@@ -12,6 +12,7 @@ import { ParticipantComponent } from '../participant/participant.component';
 import { ParticipantService } from '../services/participant.service';
 import { OrganismeModel } from '../models/organisme.model';
 import { PaysComponent } from '../pays/pays.component';
+import { SessionFormationModel } from '../models/sessionFormation.model';
 
 @Component({
   selector: 'app-list-participant',
@@ -36,6 +37,7 @@ export class ListParticipantComponent implements OnInit {
   participant: any;
   organismeService: any;
   organismes: OrganismeModel[];
+  sessionFormation: SessionFormationModel;
 
   constructor(
     private participantService: ParticipantService,
@@ -67,6 +69,7 @@ export class ListParticipantComponent implements OnInit {
     tel,
     profil,
     typeParticipant,
+    sessionFormation,
     organisme,
     pays
   ) {
@@ -80,7 +83,8 @@ export class ListParticipantComponent implements OnInit {
       email: email,
       tel: tel,
       profil: profil,
-      type: typeParticipant,
+      typeParticipant: typeParticipant,
+      sessionFormation: sessionFormation,
       organisme: organisme,
       pays: pays,
     };
@@ -117,6 +121,11 @@ export class ListParticipantComponent implements OnInit {
         this.organismes = data;
         console.log(this.organismes);
       });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   // close() {

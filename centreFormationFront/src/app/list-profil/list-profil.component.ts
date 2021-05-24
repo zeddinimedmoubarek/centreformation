@@ -72,6 +72,11 @@ export class ListProfilComponent implements OnInit {
     this.router.navigate(['./profil']);
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   // close() {
   //   this.dialogRef.close();
   // }

@@ -61,7 +61,7 @@ public class SessionFormationController {
     	sessionformation.setFormation(sessionformationDetails.getFormation());
     	sessionformation.setLieu(sessionformationDetails.getLieu());
     	sessionformation.setNbParticipants(sessionformationDetails.getNbParticipants());
-    	sessionformation.setParticipants(sessionformationDetails.getParticipants());
+    	//sessionformation.setParticipants(sessionformationDetails.getParticipants());
     	sessionformation.setOrganisme(sessionformationDetails.getOrganisme());
       
         final SessionFormation updatedSessionFormation = sessionformationRepository.save(sessionformation);

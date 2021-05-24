@@ -16,10 +16,10 @@ import java.util.Set;
 @Table(name = "participant")
 public class Participant implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nom")
@@ -50,9 +50,15 @@ public class Participant implements Serializable {
 	@JsonIgnoreProperties(value = "participantNationals", allowSetters = true)
 	private Organisme organisme;
 
-    @ManyToMany(mappedBy = "participants")
-    @JsonIgnore
-    private Set<SessionFormation> sessionFormations = new HashSet<>();
+	@ManyToMany
+	@JoinTable(name = "session_formation_participant",
+			joinColumns = @JoinColumn(name = "participant_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "session_formation_id", referencedColumnName = "id"))
+	private Set<SessionFormation> sessionFormations = new HashSet<>();
+
+    //@ManyToMany(mappedBy = "participants")
+    //@JsonIgnore
+    //private Set<SessionFormation> sessionFormations = new HashSet<>();
 
 	public Participant(Long id, String nom, String prenom, String email, String tel, EParticipant typeParticipant, Profil profil, Pays pays, Organisme organisme, Set<SessionFormation> sessionFormations) {
 		this.id = id;

@@ -10,28 +10,28 @@
   >
     <mat-toolbar>Centre Formation</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#" routerLink="/formations"
-        ><mat-icon>format_list_bulleted</mat-icon>Formations</a
+      <a mat-list-item href="#" routerLink="/formations" *ngIf="showAdminBoard"
+        ><mat-icon>school</mat-icon>Formations</a
       >
       <a mat-list-item href="#" routerLink="/sessionformations"
-        ><mat-icon>format_list_bulleted</mat-icon>Sessions</a
+        ><mat-icon>bookmarks</mat-icon>Sessions</a
       >
       <a mat-list-item href="#" routerLink="/participants"
-        ><mat-icon>format_list_bulleted</mat-icon>Participants</a
+        ><mat-icon>groups</mat-icon>Participants</a
       >
       <a mat-list-item href="#" routerLink="/formateurs"
-        ><mat-icon>format_list_bulleted</mat-icon>Formateurs</a
+        ><mat-icon>person</mat-icon>Formateurs</a
       >
-      <a mat-list-item href="#" routerLink="/pays"
-        ><mat-icon>format_list_bulleted</mat-icon>Pays</a
+      <a mat-list-item href="#" routerLink="/pays" *ngIf="showAdminBoard"
+        ><mat-icon>flag</mat-icon>Pays</a
       >
-      <a mat-list-item href="#" routerLink="/profils"
-        ><mat-icon>format_list_bulleted</mat-icon>Profiles</a
+      <a mat-list-item href="#" routerLink="/profils" *ngIf="showAdminBoard"
+        ><mat-icon>work</mat-icon>Profiles</a
       >
-      <a mat-list-item href="#" routerLink="/domaines"
-        ><mat-icon>format_list_bulleted</mat-icon>Domaines</a
+      <a mat-list-item href="#" routerLink="/domaines" *ngIf="showAdminBoard"
+        ><mat-icon>domain</mat-icon>Domaines</a
       >
-      <a mat-list-item href="#" routerLink="/organismes"
+      <a mat-list-item href="#" routerLink="/organismes" *ngIf="showAdminBoard"
         ><mat-icon>format_list_bulleted</mat-icon>Organismes</a
       >
     </mat-nav-list>
@@ -50,8 +50,8 @@
       <span class="spacer"></span>
       <a mat-button routerLink="/register" *ngIf="!isLoggedIn">Register</a>
       <a mat-button routerLink="/login" *ngIf="!isLoggedIn">Login</a>
-      <a mat-button routerLink="/admin" *ngIf="showAdminBoard">Admin</a>
-      <a mat-button routerLink="/user" *ngIf="isLoggedIn">User</a>
+      <!-- <a mat-button routerLink="/admin" *ngIf="showAdminBoard">Admin</a>
+      <a mat-button routerLink="/user" *ngIf="isLoggedIn">User</a> -->
       <a mat-button routerLink="/profile" *ngIf="isLoggedIn">{{ username }}</a>
       <a
         mat-button

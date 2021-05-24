@@ -61,9 +61,8 @@ export class LoginComponent implements OnInit {
           verticalPosition: 'bottom',
           horizontalPosition: 'right',
         });
-        this.redirect();
         //this.reloadPage();
-        //this.delay(3000);
+        this.redirect();
       },
       (err) => {
         this.errorMessage = err.error.message;

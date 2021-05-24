@@ -42,6 +42,11 @@ export class SideNavComponent {
   }
   logout() {
     this.tokenStorageService.signOut();
+    this.redirect();
     window.location.reload();
+  }
+
+  redirect() {
+    this.router.navigate(['./login']);
   }
 }

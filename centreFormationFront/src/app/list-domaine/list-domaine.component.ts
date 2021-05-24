@@ -72,6 +72,11 @@ export class ListDomaineComponent implements OnInit {
     this.router.navigate(['./domaine']);
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   // close() {
   //   this.dialogRef.close();
   // }

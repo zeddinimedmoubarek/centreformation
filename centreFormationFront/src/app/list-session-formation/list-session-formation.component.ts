@@ -12,6 +12,7 @@ import { SessionFormationComponent } from '../session-formation/session-formatio
 import { SessionFormationService } from '../services/session-formation.service';
 import { OrganismeModel } from '../models/organisme.model';
 import { FormateurModel } from '../models/formateur.model';
+import { FormationModel } from '../models/formation.model';
 
 @Component({
   selector: 'app-list-sessionFormation',
@@ -22,6 +23,7 @@ export class ListSessionFormationComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'formateur',
+    'formation',
     'organisme',
     'lieu',
     'dateDebut',
@@ -36,6 +38,7 @@ export class ListSessionFormationComponent implements OnInit {
   formateurService: any;
   organismes: OrganismeModel[];
   formateurs: FormateurModel[];
+  formations: FormationModel[];
 
   constructor(
     private sessionFormationService: SessionFormationService,
@@ -59,17 +62,28 @@ export class ListSessionFormationComponent implements OnInit {
     dialogConfig.width = '60%';
     this.dialog.open(SessionFormationComponent, dialogConfig);
   }
-  onEdit(id, formateur, organisme, lieu, dateDebut, dateFin) {
+  onEdit(
+    id,
+    formateur,
+    formation,
+    organisme,
+    lieu,
+    dateDebut,
+    dateFin,
+    nbParticipants
+  ) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       id: id,
       formateur: formateur,
+      formation: formation,
       organisme: organisme,
       lieu: lieu,
       dateDebut: dateDebut,
       dateFin: dateFin,
+      nbParticipants: nbParticipants,
     };
     dialogConfig.width = '60%';
     let dialogRef: MatDialogRef<SessionFormationComponent>;
@@ -112,6 +126,11 @@ export class ListSessionFormationComponent implements OnInit {
         this.formateurs = data;
         console.log(this.formateurs);
       });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   // close() {

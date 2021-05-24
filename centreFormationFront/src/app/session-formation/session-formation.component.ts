@@ -77,7 +77,9 @@ export class SessionFormationComponent implements OnInit {
       this.sessionFormation = this.data;
       this.selectedOrganisme = this.sessionFormation.organisme.id;
       this.selectedFormateur = this.sessionFormation.formateur.id;
-      console.log(this.selectedOrganisme);
+      this.selectedFormation = this.sessionFormation.formation.id;
+      this.nbParticipants = this.sessionFormation.nbParticipants;
+      console.log(this.data);
       this.sessionFormationForm = this.formBuilder.group({
         id: [this.sessionFormation.id],
         formateur: [this.sessionFormation.formateur, [Validators.required]],
@@ -153,8 +155,6 @@ export class SessionFormationComponent implements OnInit {
     this.sessionFormation.organisme.id = this.selectedOrganisme;
     this.sessionFormation.formateur.id = this.selectedFormateur;
     this.sessionFormation.formation.id = this.selectedFormation;
-    console.log(this.selectedFormateur);
-    console.log(this.selectedFormation);
     this.sessionFormationService
       .updateSessionFormation(id, sessionFormation)
       .subscribe(

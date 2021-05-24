@@ -72,6 +72,11 @@ export class ListPaysComponent implements OnInit {
     this.router.navigate(['./pays']);
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   // close() {
   //   this.dialogRef.close();
   // }

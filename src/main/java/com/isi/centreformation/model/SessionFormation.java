@@ -35,11 +35,11 @@ public class SessionFormation implements Serializable {
     @Column(name = "nb_participants")
     private int nbParticipants;
 
-    @ManyToMany
-    @JoinTable(name = "session_formation_participant",
-               joinColumns = @JoinColumn(name = "session_formation_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "participant_id", referencedColumnName = "id"))
-    private Set<Participant> participants = new HashSet<>();
+    //@ManyToMany
+    //@JoinTable(name = "session_formation_participant",
+               //joinColumns = @JoinColumn(name = "session_formation_id", referencedColumnName = "id"),
+               //inverseJoinColumns = @JoinColumn(name = "participant_id", referencedColumnName = "id"))
+    //private Set<Participant> participants = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "formateur_id")
@@ -54,14 +54,14 @@ public class SessionFormation implements Serializable {
     private Formation formation;
 
 	public SessionFormation(Long id, String lieu, String dateDebut, String dateFin, int nbParticipants,
-			Set<Participant> participants, Formateur formateur, Organisme organisme, Formation formation) {
+			/*Set<Participant> participants,*/ Formateur formateur, Organisme organisme, Formation formation) {
 		super();
 		this.id = id;
 		this.lieu = lieu;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.nbParticipants = nbParticipants;
-		this.participants = participants;
+		//this.participants = participants;
 		this.formateur = formateur;
 		this.organisme = organisme;
 		this.formation = formation;
@@ -111,13 +111,13 @@ public class SessionFormation implements Serializable {
 		this.nbParticipants = nbParticipants;
 	}
 
-	public Set<Participant> getParticipants() {
+	/*public Set<Participant> getParticipants() {
 		return participants;
 	}
 
 	public void setParticipants(Set<Participant> participants) {
 		this.participants = participants;
-	}
+	}*/
 
 	public Formateur getFormateur() {
 		return formateur;
@@ -146,7 +146,7 @@ public class SessionFormation implements Serializable {
 	@Override
 	public String toString() {
 		return "SessionFormation [id=" + id + ", lieu=" + lieu + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin
-				+ ", nbParticipant=" + nbParticipants + ", participants=" + participants + ", formateur=" + formateur
+				+ ", nbParticipant=" + nbParticipants /*+ ", participants=" + participants*/ + ", formateur=" + formateur
 				+ ", organisme=" + organisme + ", formation=" + formation + "]";
 	}
 

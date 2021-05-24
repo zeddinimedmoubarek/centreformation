@@ -8,6 +8,14 @@
     </button>
   </mat-card-actions>
   <mat-card-content>
+    <mat-form-field>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Recherche Session-Formation"
+        #input
+      />
+    </mat-form-field>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -22,6 +30,14 @@
       <ng-container matColumnDef="formateur">
         <th mat-header-cell *matHeaderCellDef>Nom Formateur</th>
         <td mat-cell *matCellDef="let element">{{ element.formateur.nom }}</td>
+      </ng-container>
+
+      <!-- Titre Formation Column -->
+      <ng-container matColumnDef="formation">
+        <th mat-header-cell *matHeaderCellDef>Titre Formation</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.formation.titre }}
+        </td>
       </ng-container>
 
       <!-- Prenom Formateur Column -->
@@ -74,6 +90,7 @@
               onEdit(
                 element.id,
                 element.formateur,
+                element.formation,
                 element.organisme,
                 element.lieu,
                 element.dateDebut,
